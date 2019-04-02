@@ -8,6 +8,10 @@ elseif (@$_GET['view'] == 'petugas')
 {
     include 'view/petugas/petugas.php';
 }
+elseif (@$_GET['view'] == 'tambah-petugas')
+{
+    include 'view/petugas/tambah-petugas.php';
+}
 elseif (@$_GET['view'] == 'vaksin')
 {
     include 'view/vaksin/vaksin.php';
@@ -24,7 +28,7 @@ elseif (@$_GET['view'] == 'pertumbuhan')
 {
     include 'view/pertumbuhan.php';
 }
-
+// ==============================================================
 elseif (@$_GET['view'] == 'login-admin')
 {
     include 'view/login.php';
