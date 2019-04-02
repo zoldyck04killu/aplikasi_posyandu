@@ -60,6 +60,28 @@ elseif (@$_GET['view'] == 'jadwal-imunisasi')
 {
     include 'view/jadwal-imunisasi/jadwal-imunisasi.php';
 }
+elseif (@$_GET['view'] == 'tambah-imunisasi')
+{
+    include 'view/jadwal-imunisasi/tambah-imunisasi.php';
+}
+elseif (@$_GET['view'] == 'rubah-imunisasi')
+{
+    include 'view/jadwal-imunisasi/rubah-imunisasi.php';
+}
+elseif (@$_GET['view'] == 'hapus-imunisasi')
+{
+    $id = $_GET['kode'];
+    $objAdmin->hapusImunisasi($id);
+    echo '<script>
+    swal({
+        title: "Alert",
+        text: "Data berhasil dihapus",
+        type: "success"
+    }).then(function() {
+        window.location = "?view=jadwal-imunisasi";
+    });
+  </script>';
+}
 elseif (@$_GET['view'] == 'bayi')
 {
     include 'view/bayi-belita/bayi.php';

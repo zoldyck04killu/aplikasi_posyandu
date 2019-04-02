@@ -136,6 +136,54 @@ public function hapusVaksin($id)
   $db->query("DELETE FROM vaksin WHERE Kode_vaksin = '$id' ") or die ($db->error);
 }
 
+public function showImunisasi(){
+  $db = $this->mysqli->conn;
+  $sql = "SELECT * FROM Jadwal_imunisasi";
+  $query = $db->query($sql);
+  return $query;
+}
+
+public function simpanImunisasi($kode_imunisasi, $jadwal_imunisasi){
+    $db = $this->mysqli->conn;
+    // var_dump($alamat);
+    $simpanImunisasi = $db->query("INSERT INTO Jadwal_imunisasi
+                              (Kode_imunisasi,Jadwal_imunisasi)
+                              VALUES
+                              ('$kode_imunisasi', '$jadwal_imunisasi')
+                              ") or die ($db->error);
+    if ($simpanImunisasi)
+    {
+      return true;
+    }else{
+      return false;
+    }
+}
+
+public function rubahImunisasi($id)
+ {
+   $db = $this->mysqli->conn;
+   $query = $db->query("SELECT * FROM Jadwal_imunisasi WHERE Kode_imunisasi = '$id' ") or die ($db->error);
+   return $query;
+ }
+
+ public function aksiRubahImunisasi($kode_imunisasi_lama,$kode_imunisasi, $jadwal_imunisasi)
+{
+$db = $this->mysqli->conn;
+$rubahPetugas = $db->query("UPDATE Jadwal_imunisasi SET Kode_imunisasi='$kode_imunisasi',Jadwal_imunisasi='$jadwal_imunisasi' WHERE Kode_imunisasi = '$kode_imunisasi_lama' ") or die ($db->error);
+  if ($rubahPetugas)
+  {
+    return true;
+  }else{
+    return false;
+  }
+}
+
+public function hapusImunisasi($id)
+{
+  $db = $this->mysqli->conn;
+  $db->query("DELETE FROM Jadwal_imunisasi WHERE Kode_imunisasi = '$id' ") or die ($db->error);
+}
+
 }
 
 ?>

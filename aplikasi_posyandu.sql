@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 02, 2019 at 04:19 AM
+-- Generation Time: Apr 02, 2019 at 07:32 PM
 -- Server version: 10.3.13-MariaDB
 -- PHP Version: 7.3.3
 
@@ -55,30 +55,20 @@ CREATE TABLE `bayi` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `data_petugas`
---
-
-CREATE TABLE `data_petugas` (
-  `Nip_petugas` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Nama_petugas` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Jabatan` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Jenis_kelamin` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Tempat_lahir` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Tgl_lahir` date NOT NULL,
-  `No_hp` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `alamat` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `Jadwal_imunisasi`
 --
 
 CREATE TABLE `Jadwal_imunisasi` (
   `Kode_imunisasi` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Jadwal_imunisasi` text COLLATE utf8mb4_unicode_ci NOT NULL
+  `Jadwal_imunisasi` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `Jadwal_imunisasi`
+--
+
+INSERT INTO `Jadwal_imunisasi` (`Kode_imunisasi`, `Jadwal_imunisasi`) VALUES
+('Imu001', '2019-04-17');
 
 -- --------------------------------------------------------
 
@@ -128,6 +118,30 @@ CREATE TABLE `pertumbuhan_bayi` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `petugas`
+--
+
+CREATE TABLE `petugas` (
+  `Nip_petugas` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Nama_petugas` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Jabatan` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Jenis_kelamin` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Tempat_lahir` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Tgl_lahir` date NOT NULL,
+  `No_hp` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alamat` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `petugas`
+--
+
+INSERT INTO `petugas` (`Nip_petugas`, `Nama_petugas`, `Jabatan`, `Jenis_kelamin`, `Tempat_lahir`, `Tgl_lahir`, `No_hp`, `alamat`) VALUES
+('08634234', 'momon kurniawan', 'Manager', 'pria', 'Banjarmasin Selatan', '2019-04-09', '0812645378', 'kayutangi 4');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `vaksin`
 --
 
@@ -137,6 +151,13 @@ CREATE TABLE `vaksin` (
   `Dosis` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `Keterangan_vaksin` text COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `vaksin`
+--
+
+INSERT INTO `vaksin` (`Kode_vaksin`, `Nama_vaksin`, `Dosis`, `Keterangan_vaksin`) VALUES
+('V001', 'Gizi', '2x sehari', 'minum sebelum makan');
 
 --
 -- Indexes for dumped tables
@@ -155,12 +176,6 @@ ALTER TABLE `bayi`
   ADD PRIMARY KEY (`Kode_bayi`);
 
 --
--- Indexes for table `data_petugas`
---
-ALTER TABLE `data_petugas`
-  ADD PRIMARY KEY (`Nip_petugas`);
-
---
 -- Indexes for table `Jadwal_imunisasi`
 --
 ALTER TABLE `Jadwal_imunisasi`
@@ -177,6 +192,12 @@ ALTER TABLE `pengguna`
 --
 ALTER TABLE `pertumbuhan_bayi`
   ADD PRIMARY KEY (`No_pemeriksaan`);
+
+--
+-- Indexes for table `petugas`
+--
+ALTER TABLE `petugas`
+  ADD PRIMARY KEY (`Nip_petugas`);
 
 --
 -- Indexes for table `vaksin`
