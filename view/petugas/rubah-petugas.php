@@ -1,3 +1,8 @@
+<?php
+$id = $_GET['nip'];
+$data = $objAdmin->rubahPetugas($id);
+$a = $data->fetch_object();
+ ?>
 <div class="header-hal">
     <h1>  Petugas</h1>
     <hr>
@@ -5,28 +10,29 @@
 
 <div class="form">
     <form method="post" action="">
+        <input type="hidden" name="nip_lama" value="<?=$a->Nip_petugas; ?>">
       <div class="form-group row">
         <label for="staticEmail" class="col-sm-2 col-form-label" >Nip Petugas</label>
         <div class="col-sm-10">
-            <input class="form-control" type="text" placeholder="Nip" name="nip">
+            <input class="form-control" type="text" placeholder="Nip" name="nip" value="<?=$a->Nip_petugas; ?>">
         </div>
       </div>
       <div class="form-group row">
         <label for="staticEmail" class="col-sm-2 col-form-label" >Nama Petugas</label>
         <div class="col-sm-10">
-            <input class="form-control" type="text" placeholder="Nama" name="nama">
+            <input class="form-control" type="text" placeholder="Nama" name="nama" value="<?=$a->Nama_petugas; ?>">
         </div>
       </div>
       <div class="form-group row">
         <label for="staticEmail" class="col-sm-2 col-form-label" >Jabatan</label>
         <div class="col-sm-10">
-            <input class="form-control" type="text" placeholder="Jabatan" name="jabatan">
+            <input class="form-control" type="text" placeholder="Jabatan" name="jabatan" value="<?=$a->Jabatan; ?>">
         </div>
       </div>
       <div class="form-group row">
           <label for="staticEmail" class="col-sm-2 col-form-label" >Jenis Kelamin</label>
           <div class="col-sm-10">
-              <select class="form-control" id="exampleFormControlSelect1" name="jekel">
+              <select class="form-control" id="exampleFormControlSelect1" name="jekel" value="<?=$a->Jenis_kelamin; ?>">
                 <option value="pria">Pria</option>
                 <option value="wanita">Wanita</option>
               </select>
@@ -35,25 +41,25 @@
       <div class="form-group row">
         <label for="staticEmail" class="col-sm-2 col-form-label" >Tempat Lahir</label>
         <div class="col-sm-10">
-            <input class="form-control" type="text" placeholder="Tempat Lahir" name="tempat_lahir">
+            <input class="form-control" type="text" placeholder="Tempat Lahir" name="tempat_lahir" value="<?=$a->Tempat_lahir; ?>">
         </div>
       </div>
       <div class="form-group row">
           <label for="staticEmail" class="col-sm-2 col-form-label" >Tanggal Lahir</label>
           <div class="col-sm-10">
-              <input class="form-control" type="date" placeholder="" name="tl">
+              <input class="form-control" type="date" placeholder="" name="tl" value="<?=$a->Tgl_lahir; ?>">
           </div>
       </div>
       <div class="form-group row">
         <label for="staticEmail" class="col-sm-2 col-form-label" >No Handphone</label>
         <div class="col-sm-10">
-            <input class="form-control" type="text" placeholder="No Handphone" name="no_handphone">
+            <input class="form-control" type="text" placeholder="No Handphone" name="no_handphone" value="<?=$a->No_hp; ?>">
         </div>
       </div>
       <div class="form-group row">
         <label for="staticEmail" class="col-sm-2 col-form-label" >Alamat</label>
         <div class="col-sm-10">
-            <input class="form-control" type="text" placeholder="Alamat" name="alamat">
+            <input class="form-control" type="text" placeholder="Alamat" name="alamat" value="<?=$a->alamat; ?>">
         </div>
       </div>
 
@@ -64,6 +70,8 @@
 <?php
 if (isset($_POST['savePetugas']))
 {
+    $nip_lama = $obj->conn->real_escape_string($_POST['nip_lama']);
+
   $nip = $obj->conn->real_escape_string($_POST['nip']);
   $nama = $obj->conn->real_escape_string($_POST['nama']);
   $jabatan = $obj->conn->real_escape_string($_POST['jabatan']);
@@ -74,11 +82,11 @@ if (isset($_POST['savePetugas']))
   $alamat = $obj->conn->real_escape_string($_POST['alamat']);
 
 
-  $savePetugas = $objAdmin->savePetugas($nip, $nama, $jabatan, $jekel, $tempat_lahir, $tl, $no_handphone,$alamat);
+  $savePetugas = $objAdmin->aksiRubahPetugas($nip_lama, $nip, $nama, $jabatan, $jekel, $tempat_lahir, $tl, $no_handphone,$alamat);
   if ($savePetugas) {
       echo "<script>
       swal(
-        'Save Petugas Success!',
+        'Update Petugas Success!',
         'You clicked the button!',
         'success'
       ).then(function() {

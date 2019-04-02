@@ -1,37 +1,55 @@
+<script type="text/javascript">
+    $(document).ready( function () {
+      $('#table').DataTable();
+    } );
+</script>
+
 <div class="header-hal">
     <h1>Data Petugas</h1>
     <hr>
 </div>
 
 <div class="table-responsive">
-<table class="table">
+<table class="table" id="table">
   <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Nip Petugas</th>
+      <th scope="col">Nama Petugas</th>
+      <th scope="col">Jabatan</th>
+      <th scope="col">Jekel</th>
+      <th scope="col">Tempat Lahir</th>
+      <th scope="col">Tgl Lahir</th>
+      <th scope="col">No Hp</th>
+      <th scope="col">Alamat</th>
+      <th scope="col">Config</th>
     </tr>
   </thead>
   <tbody>
+      <?php
+     $data = $objAdmin->showPetugas();
+     $no = 1;
+     while ($a = $data->fetch_object()) {
+         ?>
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <th scope="row"><?= $no ?></th>
+      <td><?= $a->Nip_petugas; ?></td>
+      <td><?= $a->Nama_petugas; ?></td>
+      <td><?= $a->Jabatan; ?></td>
+      <td><?= $a->Jenis_kelamin; ?></td>
+      <td><?= $a->Tempat_lahir; ?></td>
+      <td><?= $a->Tgl_lahir; ?></td>
+      <td><?= $a->No_hp; ?></td>
+      <td><?= $a->alamat; ?></td>
+      <td>
+          <a href="?view=rubah-petugas&nip=<?=$a->Nip_petugas; ?>" class="btn btn-sm btn-warning">Edit</a>
+          <a href="?view=hapus-petugas&nip=<?=$a->Nip_petugas; ?>" class="btn btn-sm btn-danger">Hapus</a>
+      </td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
+    <?php
+     $no++;
+     }
+     ?>
   </tbody>
 </table>
 </div>

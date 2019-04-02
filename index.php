@@ -157,6 +157,9 @@ $objAdmin = new Admin($obj);
 </html>
 
 <style media="screen">
+*{
+    font-size: 14px;
+}
 #body-row {
     margin-left:0;
     margin-right:0;

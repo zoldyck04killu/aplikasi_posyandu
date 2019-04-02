@@ -12,9 +12,49 @@ elseif (@$_GET['view'] == 'tambah-petugas')
 {
     include 'view/petugas/tambah-petugas.php';
 }
+elseif (@$_GET['view'] == 'rubah-petugas')
+{
+    include 'view/petugas/rubah-petugas.php';
+}
+elseif (@$_GET['view'] == 'hapus-petugas')
+{
+    $id = $_GET['nip'];
+    $objAdmin->hapusPetugas($id);
+    echo '<script>
+    swal({
+        title: "Alert",
+        text: "Data berhasil dihapus",
+        type: "success"
+    }).then(function() {
+        window.location = "?view=petugas";
+    });
+  </script>';
+}
 elseif (@$_GET['view'] == 'vaksin')
 {
     include 'view/vaksin/vaksin.php';
+}
+elseif (@$_GET['view'] == 'tambah-vaksin')
+{
+    include 'view/vaksin/tambah-vaksin.php';
+}
+elseif (@$_GET['view'] == 'rubah-vaksin')
+{
+    include 'view/vaksin/rubah-vaksin.php';
+}
+elseif (@$_GET['view'] == 'hapus-vaksin')
+{
+    $id = $_GET['kode'];
+    $objAdmin->hapusVaksin($id);
+    echo '<script>
+    swal({
+        title: "Alert",
+        text: "Data berhasil dihapus",
+        type: "success"
+    }).then(function() {
+        window.location = "?view=vaksin";
+    });
+  </script>';
 }
 elseif (@$_GET['view'] == 'jadwal-imunisasi')
 {
@@ -39,18 +79,6 @@ elseif (@$_GET['view'] == 'logout-admin')
     echo '<script>
     window.location="?view=login-admin";
      </script>';
-}
-elseif (@$_GET['view'] == 'input-anggota')
-{
-    include 'view/admin/input-anggota.php';
-}
-elseif (@$_GET['view'] == 'data-anggota')
-{
-    include 'view/admin/data-anggota.php';
-}
-elseif (@$_GET['view'] == 'edit-anggota')
-{
-    include 'view/admin/edit-anggota.php';
 }
 elseif (@$_GET['view'] == 'hapus')
 {

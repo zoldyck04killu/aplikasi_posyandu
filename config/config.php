@@ -6,7 +6,7 @@ session_start();
 $host = 'localhost';
 $user = 'root';
 $pass = '4';
-$db   = 'aplikasi_perpustakaan';
+$db   = 'aplikasi_posyandu';
 // end
 
 function base_url($url = null ) {
