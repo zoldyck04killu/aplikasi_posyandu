@@ -86,9 +86,53 @@ elseif (@$_GET['view'] == 'bayi')
 {
     include 'view/bayi-belita/bayi.php';
 }
+elseif (@$_GET['view'] == 'tambah-bayi')
+{
+    include 'view/bayi-belita/tambah-bayi.php';
+}
+elseif (@$_GET['view'] == 'rubah-bayi')
+{
+    include 'view/bayi-belita/rubah-bayi.php';
+}
+elseif (@$_GET['view'] == 'hapus-bayi')
+{
+    $id = $_GET['kode'];
+    $objAdmin->hapusBayi($id);
+    echo '<script>
+    swal({
+        title: "Alert",
+        text: "Data berhasil dihapus",
+        type: "success"
+    }).then(function() {
+        window.location = "?view=bayi";
+    });
+  </script>';
+}
 elseif (@$_GET['view'] == 'pertumbuhan')
 {
-    include 'view/pertumbuhan.php';
+    include 'view/pertumbuhan-bayi/pertumbuhan.php';
+}
+elseif (@$_GET['view'] == 'tambah-pertumbuhan')
+{
+    include 'view/pertumbuhan-bayi/tambah-pertumbuhan.php';
+}
+elseif (@$_GET['view'] == 'rubah-pertumbuhan')
+{
+    include 'view/pertumbuhan-bayi/rubah-pertumbuhan.php';
+}
+elseif (@$_GET['view'] == 'hapus-pertumbuhan')
+{
+    $id = $_GET['kode'];
+    $objAdmin->hapusPertumbuhan($id);
+    echo '<script>
+    swal({
+        title: "Alert",
+        text: "Data berhasil dihapus",
+        type: "success"
+    }).then(function() {
+        window.location = "?view=pertumbuhan";
+    });
+  </script>';
 }
 // ==============================================================
 elseif (@$_GET['view'] == 'login-admin')

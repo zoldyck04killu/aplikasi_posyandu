@@ -184,6 +184,116 @@ public function hapusImunisasi($id)
   $db->query("DELETE FROM Jadwal_imunisasi WHERE Kode_imunisasi = '$id' ") or die ($db->error);
 }
 
+
+public function showBayi(){
+  $db = $this->mysqli->conn;
+  $sql = "SELECT * FROM bayi";
+  $query = $db->query($sql);
+  return $query;
+}
+
+public function simpanBayi($kode_bayi, $nama_bayi,$jekel,$tempat_lahir,$tanggal_lahir,$nama_ibu,$umur_ibu,$agama,$no_hp,$alamat){
+    $db = $this->mysqli->conn;
+    // var_dump($alamat);
+    $simpanBayi = $db->query("INSERT INTO bayi
+                              (Kode_bayi,Nama_bayi,Jekel,Tempat_lahir,Tanggal_lahir,Nama_ibu,Umur_ibu,Agama,No_hp,Alamat)
+                              VALUES
+                              ('$kode_bayi', '$nama_bayi','$jekel','$tempat_lahir','$tanggal_lahir','$nama_ibu','$umur_ibu','$agama','$no_hp','$alamat')
+                              ") or die ($db->error);
+    if ($simpanBayi)
+    {
+      return true;
+    }else{
+      return false;
+    }
+}
+
+public function rubahBayi($id)
+ {
+   $db = $this->mysqli->conn;
+   $query = $db->query("SELECT * FROM bayi WHERE Kode_bayi = '$id' ") or die ($db->error);
+   return $query;
+ }
+
+ public function aksiRubahBayi($kode_bayi_lama,$kode_bayi, $nama_bayi,$jekel,$tempat_lahir,$tanggal_lahir,$nama_ibu,$umur_ibu,$agama,$no_hp,$alamat)
+{
+$db = $this->mysqli->conn;
+$rubahBayi = $db->query("UPDATE bayi SET Kode_bayi='$kode_bayi',Nama_bayi='$nama_bayi',Jekel='$jekel',Tempat_lahir='$tempat_lahir',Tanggal_lahir='$tanggal_lahir',
+  Nama_ibu='$nama_ibu',Umur_ibu='$umur_ibu',Agama='$agama',No_hp='$no_hp',Alamat='$alamat'
+  WHERE Kode_bayi = '$kode_bayi_lama' ") or die ($db->error);
+  if ($rubahBayi)
+  {
+    return true;
+  }else{
+    return false;
+  }
+}
+
+public function hapusBayi($id)
+{
+  $db = $this->mysqli->conn;
+  $db->query("DELETE FROM bayi WHERE Kode_bayi = '$id' ") or die ($db->error);
+}
+
+// ============================================================================================
+
+public function showPertumbuhan(){
+  $db = $this->mysqli->conn;
+  $sql = "SELECT * FROM pertumbuhan_bayi";
+  $query = $db->query($sql);
+  return $query;
+}
+
+public function simpanPertumbuhan($no_pemeriksaan, $tgl_pemeriksaan,$nip_petugas,$nama_petugas,$kode_jadwal,$jadwal_imunisasi,$kode_vaksin,$jens_vaksin,$nama_vaksin,$dosis,$keterangan_vaksin,$kode_bayi,$nama_bayi,$jekel_bayi,
+                    $tgl_lahir,$umur_bayi,$keterangan,$keluhan,$berat_badan,$lingkar_kepala,$lebar_badan,$keterangan_gizi){
+    $db = $this->mysqli->conn;
+    // var_dump($alamat);
+    $simpanPertumbuhan = $db->query("INSERT INTO pertumbuhan_bayi
+                              (No_pemeriksaan,Tanggal,Nip_petugas,Nama_petugas,Kode_jadwal,Jadwal_imunisasi,Kode_vaksin,Jenis_vaksin,Nama_vaksin,Dosis,Keterangan_vaksin,Kode_bayi,Nama_bayi,Jenis_kelamin,Tgl_lahir,Umur_bayi,Keterangan,Keluhan,Berat_badan,Lingkar_kepala,Lebar_badan,Keterangan_gizi)
+                              VALUES
+                              ('$no_pemeriksaan', '$tgl_pemeriksaan','$nip_petugas','$nama_petugas','$kode_jadwal','$jadwal_imunisasi','$kode_vaksin','$jens_vaksin','$nama_vaksin','$dosis','$keterangan_vaksin','$kode_bayi','$nama_bayi','$jekel_bayi','$tgl_lahir','$umur_bayi','$keterangan','$keluhan','$berat_badan','$lingkar_kepala',
+                                '$lebar_badan','$keterangan_gizi')
+                              ") or die ($db->error);
+    if ($simpanPertumbuhan)
+    {
+      return true;
+    }else{
+      return false;
+    }
+}
+
+public function rubahPertumbuhan($id)
+ {
+   $db = $this->mysqli->conn;
+   $query = $db->query("SELECT * FROM pertumbuhan_bayi WHERE No_pemeriksaan = '$id' or 1=1  ") or die ($db->error);
+   return $query;
+ }
+
+ public function aksiRubahPertumbuhan($no_pemeriksaan_lama,$no_pemeriksaan, $tgl_pemeriksaan,$nip_petugas,$nama_petugas,
+         $kode_jadwal,$jadwal_imunisasi,$kode_vaksin,$jens_vaksin,$nama_vaksin,$dosis,$keterangan_vaksin,$kode_bayi,$nama_bayi,
+       $jekel_bayi,$tgl_lahir,$umur_bayi,$keterangan,$keluhan,$berat_badan,$lingkar_kepala,$lebar_badan,$keterangan_gizi)
+{
+$db = $this->mysqli->conn;
+$rubahPertumbuhan = $db->query("UPDATE pertumbuhan_bayi SET No_pemeriksaan='$no_pemeriksaan',Tanggal='$tgl_pemeriksaan',
+  Nip_petugas='$nip_petugas',Nama_petugas='$nama_petugas',Kode_jadwal='$kode_jadwal',Jadwal_imunisasi='$jadwal_imunisasi',
+  Kode_vaksin='$kode_vaksin',Jenis_vaksin='$jens_vaksin',Nama_vaksin='$nama_vaksin',Dosis='$dosis',Keterangan_vaksin='$keterangan_vaksin',
+  Kode_bayi='$kode_bayi',Nama_bayi='$nama_bayi',Jenis_kelamin='$jekel_bayi',Tgl_lahir='$tgl_lahir',Umur_bayi='$umur_bayi',
+  Keterangan='$keterangan',Keluhan='$keluhan',Berat_badan='$berat_badan',Lingkar_kepala='$lingkar_kepala',Lebar_badan='$lebar_badan',
+  Keterangan_gizi='$keterangan_gizi' WHERE No_pemeriksaan = '$no_pemeriksaan_lama' ") or die ($db->error);
+  if ($rubahPertumbuhan)
+  {
+    return true;
+  }else{
+    return false;
+  }
+}
+
+public function hapusPertumbuhan($id)
+{
+  $db = $this->mysqli->conn;
+  $db->query("DELETE FROM pertumbuhan_bayi WHERE No_pemeriksaan = '$id' ") or die ($db->error);
+}
+
 }
 
 ?>
