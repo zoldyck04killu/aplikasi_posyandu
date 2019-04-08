@@ -273,6 +273,14 @@ public function showPertumbuhan(){
   return $query;
 }
 
+public function showPertumbuhan_perbayi($kode){
+  $db = $this->mysqli->conn;
+  $sql = "SELECT * FROM pertumbuhan_bayi WHERE No_pemeriksaan='$kode'";
+  $query = $db->query($sql);
+  return $query;
+}
+
+
 public function simpanPertumbuhan($no_pemeriksaan, $tgl_pemeriksaan,$nip_petugas,$nama_petugas,$kode_jadwal,$jadwal_imunisasi,$kode_vaksin,$jens_vaksin,$nama_vaksin,$dosis,$keterangan_vaksin,$kode_bayi,$nama_bayi,$jekel_bayi,
                     $tgl_lahir,$umur_bayi,$keterangan,$keluhan,$berat_badan,$lingkar_kepala,$lebar_badan,$keterangan_gizi){
     $db = $this->mysqli->conn;
@@ -294,7 +302,7 @@ public function simpanPertumbuhan($no_pemeriksaan, $tgl_pemeriksaan,$nip_petugas
 public function rubahPertumbuhan($id)
  {
    $db = $this->mysqli->conn;
-   $query = $db->query("SELECT * FROM pertumbuhan_bayi WHERE No_pemeriksaan = '$id' or 1=1  ") or die ($db->error);
+   $query = $db->query("SELECT * FROM pertumbuhan_bayi WHERE No_pemeriksaan = '$id' ") or die ($db->error);
    return $query;
  }
 

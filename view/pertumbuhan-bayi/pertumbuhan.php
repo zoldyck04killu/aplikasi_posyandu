@@ -81,7 +81,9 @@
       </td>
       <td>
           <a href="?view=grafik&kode=<?=$a->Kode_bayi; ?>" class="btn btn-sm btn-info">Grafik</a>
+          <a href="view/laporan/laporan-pertumbuhan.php?kode=<?=$a->No_pemeriksaan; ?>" class="btn btn-sm btn-dark">Laporan</a>
       </td>
+
     </tr>
     <?php
      $no++;
@@ -93,9 +95,6 @@
 
 <a href="?view=tambah-pertumbuhan">
     <button type="button" class="btn btn-primary">Tambah</button>
-</a>
-<a href="view/laporan/laporan-pertumbuhan.php">
-    <button type="button" class="btn btn-default">Cetak Laporan</button>
 </a>
 
 <?php } ?>
