@@ -1,3 +1,5 @@
+<?php if (@$_SESSION['user']) { ?>
+
 <script type="text/javascript">
     $(document).ready( function () {
       $('#table').DataTable();
@@ -38,6 +40,8 @@
       <th scope="col">Keterangan Gizi</th>
 
       <th scope="col">Config</th>
+      <th scope="col">Grafik</th>
+
     </tr>
   </thead>
   <tbody>
@@ -75,6 +79,9 @@
           <a href="?view=rubah-pertumbuhan&kode=<?=$a->No_pemeriksaan; ?>" class="btn btn-sm btn-warning">Edit</a>
           <a href="?view=hapus-pertumbuhan&kode=<?=$a->No_pemeriksaan; ?>" class="btn btn-sm btn-danger">Hapus</a>
       </td>
+      <td>
+          <a href="?view=grafik&kode=<?=$a->Kode_bayi; ?>" class="btn btn-sm btn-info">Grafik</a>
+      </td>
     </tr>
     <?php
      $no++;
@@ -87,6 +94,8 @@
 <a href="?view=tambah-pertumbuhan">
     <button type="button" class="btn btn-primary">Tambah</button>
 </a>
-<a href="#">
+<a href="view/laporan/laporan-pertumbuhan.php">
     <button type="button" class="btn btn-default">Cetak Laporan</button>
 </a>
+
+<?php } ?>

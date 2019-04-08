@@ -139,6 +139,10 @@ elseif (@$_GET['view'] == 'login-admin')
 {
     include 'view/login.php';
 }
+elseif (@$_GET['view'] == 'register-admin')
+{
+    include 'view/register.php';
+}
 elseif (@$_GET['view'] == 'logout-admin')
 {
     $objAdmin->logout();
@@ -146,19 +150,25 @@ elseif (@$_GET['view'] == 'logout-admin')
     window.location="?view=login-admin";
      </script>';
 }
-elseif (@$_GET['view'] == 'hapus')
+elseif (@$_GET['view'] == 'login-pengguna')
 {
-    $id = $_GET['id'];
-    $objAdmin->hapus($id);
+    include 'view/login-pengguna.php';
+}
+elseif (@$_GET['view'] == 'register-pengguna')
+{
+    include 'view/register-pengguna.php';
+}
+elseif (@$_GET['view'] == 'logout-pengguna')
+{
+    $objAdmin->logout();
     echo '<script>
-    swal({
-        title: "Alert",
-        text: "Data berhasil dihapus",
-        type: "success"
-    }).then(function() {
-        window.location = "?view=data-anggota";
-    });
-  </script>';
+    window.location="?view=login-pengguna";
+     </script>';
+
+}
+elseif (@$_GET['view'] == 'grafik')
+{
+    include 'view/pertumbuhan-bayi/grafik.php';
 }
 else
 {

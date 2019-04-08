@@ -1,5 +1,5 @@
 <div class="header-hal">
-    <h1>LOGIN ADMIN</h1>
+    <h1>REGISTER ADMIN</h1>
     <hr>
 </div>
 
@@ -18,24 +18,22 @@
         </div>
       </div>
 
-      <button type="submit" class="btn btn-primary" name="login">Login</button>
-      <a class="text-secondary" href="?view=register-admin ">
-          Register
-      </a>
+      <button type="submit" class="btn btn-primary" name="register_admin">Register</button>
     </form>
 </div>
 
 
 <?php
 
-if (isset($_POST['login'])) {
+if (isset($_POST['register_admin'])) {
   $username = $obj->conn->real_escape_string($_POST['username']);
   $password = $obj->conn->real_escape_string($_POST['password']);
+  $password_hash = password_hash($password, PASSWORD_DEFAULT);
   // login
-  $login = $objAdmin->login($username, $password);
+  $login = $objAdmin->register_admin($username, $password_hash);
   if ($login) {
       echo '<script>
-      window.location="?view=home";
+      window.location="?view=login-admin";
        </script>';
   }else {
     echo '<script> alert("error login"); </script>';

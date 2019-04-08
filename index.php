@@ -64,13 +64,22 @@ $objAdmin = new Admin($obj);
                 <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
                     <small>MAIN MENU</small>
                 </li>
-                <a href="#" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
-                    <div class="d-flex w-100 justify-content-start align-items-center">
+                  <?php if (@$_SESSION['user']) { ?>
+                    <a href="?view=logout-admin" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                      <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-dashboard fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Logout</span>
+                      </div>
+                    </a>
+                  <?php }else { ?>
+                    <a href="?view=login-admin" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                      <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-dashboard fa-fw mr-3"></span>
                         <span class="menu-collapsed">Admin</span>
-                    </div>
-                </a>
-                <a href="#"  aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                      </div>
+                    </a>
+                  <?php } ?>
+                <a href="?view=login-pengguna"  aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-dashboard fa-fw mr-3"></span>
                         <span class="menu-collapsed">User</span>
@@ -82,6 +91,7 @@ $objAdmin = new Admin($obj);
                         <span class="menu-collapsed">Menu Utama</span>
                     </div>
                 </a>
+                <?php if (@$_SESSION['user']) { ?>
                 <a href="?view=petugas"  aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-dashboard fa-fw mr-3"></span>
@@ -112,13 +122,7 @@ $objAdmin = new Admin($obj);
                         <span class="menu-collapsed">Pertumbuhan</span>
                     </div>
                 </a>
-                <a href="#submenu1"  aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
-                    <div class="d-flex w-100 justify-content-start align-items-center">
-                        <span class="fa fa-dashboard fa-fw mr-3"></span>
-                        <span class="menu-collapsed">Logout</span>
-                    </div>
-                </a>
-
+              <?php } ?>
                 <!-- <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-user fa-fw mr-3"></span>

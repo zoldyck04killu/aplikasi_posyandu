@@ -1,3 +1,5 @@
+<?php if (@$_SESSION['user']) { ?>
+
 <?php
 $id = $_GET['kode'];
 $data = $objAdmin->rubahImunisasi($id);
@@ -60,3 +62,5 @@ if (isset($_POST['simpanImunisasi']))
 
 
 ?>
+
+<?php } ?>

@@ -1,5 +1,5 @@
 <div class="header-hal">
-    <h1>LOGIN ADMIN</h1>
+    <h1>REGISTER PENGGUNA</h1>
     <hr>
 </div>
 
@@ -17,25 +17,27 @@
             <input class="form-control" type="password" placeholder="Password" name="password">
         </div>
       </div>
+      <input type="hidden" name="hak_akses" value="1">
+      <input type="hidden" name="blokir_pengguna" value="0">
 
-      <button type="submit" class="btn btn-primary" name="login">Login</button>
-      <a class="text-secondary" href="?view=register-admin ">
-          Register
-      </a>
+      <button type="submit" class="btn btn-primary" name="register_pengguna">Register</button>
     </form>
 </div>
 
-
 <?php
 
-if (isset($_POST['login'])) {
+if (isset($_POST['register_pengguna'])) {
   $username = $obj->conn->real_escape_string($_POST['username']);
   $password = $obj->conn->real_escape_string($_POST['password']);
+  $password_hash = password_hash($password, PASSWORD_DEFAULT);
+  $hak_akses = $obj->conn->real_escape_string($_POST['hak_akses']);
+  $blokir_pengguna = $obj->conn->real_escape_string($_POST['blokir_pengguna']);
+
   // login
-  $login = $objAdmin->login($username, $password);
+  $login = $objAdmin->register_pengguna($username, $password_hash, $hak_akses, $blokir_pengguna);
   if ($login) {
       echo '<script>
-      window.location="?view=home";
+      window.location="?view=register-pengguna";
        </script>';
   }else {
     echo '<script> alert("error login"); </script>';

@@ -1,3 +1,5 @@
+<?php if (@$_SESSION['user']) { ?>
+
 <?php
 $id = $_GET['nip'];
 $data = $objAdmin->rubahPetugas($id);
@@ -106,3 +108,5 @@ if (isset($_POST['savePetugas']))
 
 
 ?>
+
+<?php } ?>

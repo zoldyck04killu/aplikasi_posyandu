@@ -1,3 +1,5 @@
+<?php if (@$_SESSION['user']) { ?>
+
 <?php
 $id = $_GET['kode'];
 $data = $objAdmin->rubahVaksin($id);
@@ -74,3 +76,5 @@ if (isset($_POST['simpanVaksin']))
 
 
 ?>
+
+<?php } ?>

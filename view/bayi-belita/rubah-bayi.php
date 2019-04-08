@@ -1,3 +1,5 @@
+<?php if (@$_SESSION['user']) { ?>
+
 <?php
 $id = $_GET['kode'];
 $data = $objAdmin->rubahBayi($id);
@@ -119,3 +121,5 @@ $a = $data->fetch_object();
 
 
 ?>
+
+<?php }  ?>

@@ -1,3 +1,5 @@
+<?php if (@$_SESSION['user']) { ?>
+
 <div class="header-hal">
   <h1>Data Bayi Dan Belita</h1>
     <hr>
@@ -111,3 +113,5 @@ if (isset($_POST['simpanBayi']))
 
 
 ?>
+
+<?php } ?>

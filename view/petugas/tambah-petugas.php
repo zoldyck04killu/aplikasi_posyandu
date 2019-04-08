@@ -1,3 +1,5 @@
+<?php if (@$_SESSION['user']) { ?>
+
 <div class="header-hal">
     <h1>  Petugas</h1>
     <hr>
@@ -98,3 +100,5 @@ if (isset($_POST['savePetugas']))
 
 
 ?>
+
+<?php } ?>

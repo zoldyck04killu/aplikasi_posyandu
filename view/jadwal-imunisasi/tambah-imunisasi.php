@@ -1,3 +1,5 @@
+<?php if (@$_SESSION['user']) { ?>
+
 <div class="header-hal">
     <h1>Data Jadwal Imunisasi</h1>
     <hr>
@@ -51,3 +53,6 @@ if (isset($_POST['simpanImunisasi']))
 
 
 ?>
+
+
+<?php } ?>

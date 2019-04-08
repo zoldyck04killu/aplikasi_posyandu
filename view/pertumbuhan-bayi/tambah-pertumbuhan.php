@@ -1,3 +1,5 @@
+<?php if (@$_SESSION['user']) { ?>
+
 <div class="header-hal">
   <h1>Data Pertumbuhan</h1>
     <hr>
@@ -35,8 +37,8 @@
       <div class="form-group row">
           <label for="staticEmail" class="col-sm-2 col-form-label" >Nama Petugas</label>
           <div class="col-sm-10">
-              <input class="form-control" type="text" placeholder="Nama Petugas" name="" disabled>
-              <input class="form-control" type="hidden" placeholder="Nama Petugas" name="nama_petugas">
+              <!-- <input class="form-control" type="text" placeholder="Nama Petugas" name="" disabled> -->
+              <input class="form-control" type="text" placeholder="Nama Petugas" name="nama_petugas">
 
           </div>
       </div>
@@ -72,8 +74,8 @@
       <div class="form-group row">
           <label for="staticEmail" class="col-sm-2 col-form-label" >Jenis Vaksin</label>
           <div class="col-sm-10">
-              <input class="form-control" type="text" placeholder="Jenis Vaksin" name="" disabled>
-              <input class="form-control" type="hidden" placeholder="Jenis Vaksin" name="jens_vaksin" >
+              <!-- <input class="form-control" type="text" placeholder="Jenis Vaksin" name="" disabled> -->
+              <input class="form-control" type="text" placeholder="Jenis Vaksin" name="jens_vaksin" >
 
           </div>
       </div>
@@ -81,24 +83,24 @@
       <div class="form-group row">
           <label for="staticEmail" class="col-sm-2 col-form-label" >Nama Vaksin</label>
           <div class="col-sm-10">
-              <input class="form-control" type="text" placeholder="Nama Vaksin" name="" disabled>
-              <input class="form-control" type="hidden" placeholder="Nama Vaksin" name="nama_vaksin" >
+              <!-- <input class="form-control" type="text" placeholder="Nama Vaksin" name="" disabled> -->
+              <input class="form-control" type="text" placeholder="Nama Vaksin" name="nama_vaksin" >
 
           </div>
       </div>
       <div class="form-group row">
           <label for="staticEmail" class="col-sm-2 col-form-label" >Dosis</label>
           <div class="col-sm-10">
-              <input class="form-control" type="text" placeholder="Dosis" name="" disabled>
-              <input class="form-control" type="hidden" placeholder="Dosis" name="dosis" >
+              <!-- <input class="form-control" type="text" placeholder="Dosis" name="" disabled> -->
+              <input class="form-control" type="text" placeholder="Dosis" name="dosis" >
 
           </div>
       </div>
       <div class="form-group row">
           <label for="staticEmail" class="col-sm-2 col-form-label" >Keterangan Vaksin</label>
           <div class="col-sm-10">
-              <input class="form-control" type="text" placeholder="Keterangan Vaksin" name="" disabled>
-              <input class="form-control" type="hidden" placeholder="Keterangan Vaksin" name="keterangan_vaksin" >
+              <!-- <input class="form-control" type="text" placeholder="Keterangan Vaksin" name="" disabled> -->
+              <input class="form-control" type="text" placeholder="Keterangan Vaksin" name="keterangan_vaksin" >
 
           </div>
       </div>
@@ -111,8 +113,8 @@
       <div class="form-group row">
           <label for="staticEmail" class="col-sm-2 col-form-label" >Nama Bayi</label>
           <div class="col-sm-10">
-              <input class="form-control" type="text" placeholder="Nama bayi" name="" disabled>
-              <input class="form-control" type="hidden" placeholder="Nama bayi" name="nama_bayi" >
+              <!-- <input class="form-control" type="text" placeholder="Nama bayi" name="" disabled> -->
+              <input class="form-control" type="text" placeholder="Nama bayi" name="nama_bayi" >
 
           </div>
       </div>
@@ -232,3 +234,6 @@ if (isset($_POST['simpanPertumbuhan']))
 
 
 ?>
+
+
+<?php } ?>

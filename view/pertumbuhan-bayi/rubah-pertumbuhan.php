@@ -1,3 +1,5 @@
+<?php if (@$_SESSION['user']) { ?>
+
 <?php
 $id = $_GET['kode'];
 $data = $objAdmin->rubahPertumbuhan($id);
@@ -42,8 +44,8 @@ $a = $data->fetch_object();
        <div class="form-group row">
            <label for="staticEmail" class="col-sm-2 col-form-label" >Nama Petugas</label>
            <div class="col-sm-10">
-               <input class="form-control" type="text" placeholder="Nama Petugas" name="" disabled>
-               <input class="form-control" type="hidden" placeholder="Nama Petugas" name="nama_petugas" value="<?= $a->Nama_petugas ?>">
+               <!-- <input class="form-control" type="text" placeholder="Nama Petugas" name="" disabled> -->
+               <input class="form-control" type="text" placeholder="Nama Petugas" name="nama_petugas" value="<?= $a->Nama_petugas ?>">
            </div>
        </div>
        <div class="form-group row">
@@ -79,8 +81,8 @@ $a = $data->fetch_object();
        <div class="form-group row">
            <label for="staticEmail" class="col-sm-2 col-form-label" >Jenis Vaksin</label>
            <div class="col-sm-10">
-               <input class="form-control" type="text" placeholder="Jenis Vaksin" name="" disabled>
-               <input class="form-control" type="hidden" placeholder="Jenis Vaksin" name="jens_vaksin" value="<?= $a->Jenis_vaksin; ?>" >
+               <!-- <input class="form-control" type="text" placeholder="Jenis Vaksin" name="" disabled> -->
+               <input class="form-control" type="text" placeholder="Jenis Vaksin" name="jens_vaksin" value="<?= $a->Jenis_vaksin; ?>" >
 
            </div>
        </div>
@@ -88,24 +90,24 @@ $a = $data->fetch_object();
        <div class="form-group row">
            <label for="staticEmail" class="col-sm-2 col-form-label" >Nama Vaksin</label>
            <div class="col-sm-10">
-               <input class="form-control" type="text" placeholder="Nama Vaksin" name="" disabled>
-               <input class="form-control" type="hidden" placeholder="Nama Vaksin" name="nama_vaksin" value="<?= $a->Nama_vaksin; ?>">
+               <!-- <input class="form-control" type="text" placeholder="Nama Vaksin" name="" disabled> -->
+               <input class="form-control" type="text" placeholder="Nama Vaksin" name="nama_vaksin" value="<?= $a->Nama_vaksin; ?>">
 
            </div>
        </div>
        <div class="form-group row">
            <label for="staticEmail" class="col-sm-2 col-form-label" >Dosis</label>
            <div class="col-sm-10">
-               <input class="form-control" type="text" placeholder="Dosis" name="" disabled>
-               <input class="form-control" type="hidden" placeholder="Dosis" name="dosis" value="<?= $a->Dosis; ?>">
+               <!-- <input class="form-control" type="text" placeholder="Dosis" name="" disabled> -->
+               <input class="form-control" type="text" placeholder="Dosis" name="dosis" value="<?= $a->Dosis; ?>">
 
            </div>
        </div>
        <div class="form-group row">
            <label for="staticEmail" class="col-sm-2 col-form-label" >Keterangan Vaksin</label>
            <div class="col-sm-10">
-               <input class="form-control" type="text" placeholder="Keterangan Vaksin" name="" disabled>
-               <input class="form-control" type="hidden" placeholder="Keterangan Vaksin" name="keterangan_vaksin" value="<?= $a->Keterangan_vaksin; ?>">
+               <!-- <input class="form-control" type="text" placeholder="Keterangan Vaksin" name="" disabled> -->
+               <input class="form-control" type="text" placeholder="Keterangan Vaksin" name="keterangan_vaksin" value="<?= $a->Keterangan_vaksin; ?>">
 
            </div>
        </div>
@@ -118,8 +120,8 @@ $a = $data->fetch_object();
        <div class="form-group row">
            <label for="staticEmail" class="col-sm-2 col-form-label" >Nama Bayi</label>
            <div class="col-sm-10">
-               <input class="form-control" type="text" placeholder="Nama bayi" name="" disabled>
-               <input class="form-control" type="hidden" placeholder="Nama bayi" name="nama_bayi" value="<?= $a->Nama_bayi; ?>">
+               <!-- <input class="form-control" type="text" placeholder="Nama bayi" name="" disabled> -->
+               <input class="form-control" type="text" placeholder="Nama bayi" name="nama_bayi" value="<?= $a->Nama_bayi; ?>">
 
            </div>
        </div>
@@ -241,3 +243,5 @@ $a = $data->fetch_object();
 
 
  ?>
+
+<?php } ?>

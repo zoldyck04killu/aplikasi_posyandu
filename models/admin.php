@@ -13,19 +13,48 @@ class Admin
     $this->mysqli = $mysqli;
   }
 
-  function register($username, $password_hash)
+  function register_admin($username, $password_hash)
   {
     $db = $this->mysqli->conn;
-    $db->query("INSERT INTO admin (admin, passadmin) VALUES ('$username','$password_hash')") or die ($db->error);
+    $db->query("INSERT INTO admin (username, password) VALUES ('$username','$password_hash')") or die ($db->error);
+    return true;
+  }
+
+  function register_pengguna($username, $password_hash, $hak_akses, $blokir_pengguna)
+  {
+    $db = $this->mysqli->conn;
+    $tanggal = date('Y/m/d');
+    $register = $db->query("INSERT INTO pengguna (username, password,hak_akses,Tanggal,Blokir_pengguna) VALUES ('$username', '$password_hash', '$hak_akses', '$tanggal', '$blokir_pengguna')") or die ($db->error);
+    if ($register) {
+        return true;
+    } else {
+        return false; // password salah
+    }
   }
 
   public function login($username, $password){
   $db = $this->mysqli->conn;
-  $userdata = $db->query("SELECT * FROM admin WHERE admin = '$username' ") or die ($db->error);
+  $userdata = $db->query("SELECT * FROM admin WHERE username = '$username' ") or die ($db->error);
   $cek = $userdata->num_rows;
   $cek_2 = $userdata->fetch_array();
-          if (password_verify($password, $cek_2['passadmin'])) {
-              $_SESSION['user'] = $cek_2['admin']; //session KTP
+          if (password_verify($password, $cek_2['password'])) {
+              $_SESSION['user'] = $cek_2['username'];
+              $_SESSION['hak_akses'] = $cek_2['hak_akses']; //session
+               //session
+              return true;
+          } else {
+              return false; // password salah
+          }
+  }
+
+  public function login_pengguna($username, $password){
+  $db = $this->mysqli->conn;
+  $userdata = $db->query("SELECT * FROM pengguna WHERE username = '$username' ") or die ($db->error);
+  $cek = $userdata->num_rows;
+  $cek_2 = $userdata->fetch_array();
+          if (password_verify($password, $cek_2['password'])) {
+              $_SESSION['user'] = $cek_2['username']; //session
+              $_SESSION['hak_akses'] = $cek_2['hak_akses']; //session
               return true;
           } else {
               return false; // password salah
@@ -293,6 +322,14 @@ public function hapusPertumbuhan($id)
   $db = $this->mysqli->conn;
   $db->query("DELETE FROM pertumbuhan_bayi WHERE No_pemeriksaan = '$id' ") or die ($db->error);
 }
+
+public function grafk_pertumbuhan($kode_bayi){
+  $db = $this->mysqli->conn;
+  $sql = "SELECT * FROM pertumbuhan_bayi  where Kode_bayi='$kode_bayi' ";
+  $query = $db->query($sql);
+  return $query;
+}
+
 
 }
 

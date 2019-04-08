@@ -1,3 +1,5 @@
+<?php if (@$_SESSION['user']) { ?>
+
 <script type="text/javascript">
     $(document).ready( function () {
       $('#table').DataTable();
@@ -57,6 +59,8 @@
 <a href="?view=tambah-petugas">
     <button type="button" class="btn btn-primary">Tambah</button>
 </a>
-<a href="#">
+<a href="view/laporan/laporan-petugas.php">
     <button type="button" class="btn btn-default">Cetak Laporan</button>
 </a>
+
+<?php } ?>
