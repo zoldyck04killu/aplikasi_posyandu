@@ -38,10 +38,10 @@
       <th scope="col">Lingkar Kepala</th>
       <th scope="col">Lebar Badan</th>
       <th scope="col">Keterangan Gizi</th>
-
+      <?php if (@$_SESSION['hak_akses'] == 0) { ?>
       <th scope="col">Config</th>
-      <th scope="col">Grafik</th>
-
+    <?php } ?>
+      <th scope="col">Fitur</th>
     </tr>
   </thead>
   <tbody>
@@ -74,16 +74,16 @@
       <td><?= $a->Lingkar_kepala; ?></td>
       <td><?= $a->Lebar_badan; ?></td>
       <td><?= $a->Keterangan_gizi; ?></td>
-
+      <?php if (@$_SESSION['hak_akses'] == 0) { ?>
       <td>
           <a href="?view=rubah-pertumbuhan&kode=<?=$a->No_pemeriksaan; ?>" class="btn btn-sm btn-warning">Edit</a>
           <a href="?view=hapus-pertumbuhan&kode=<?=$a->No_pemeriksaan; ?>" class="btn btn-sm btn-danger">Hapus</a>
       </td>
+    <?php } ?>
       <td>
           <a href="?view=grafik&kode=<?=$a->Kode_bayi; ?>" class="btn btn-sm btn-info">Grafik</a>
           <a href="view/laporan/laporan-pertumbuhan.php?kode=<?=$a->No_pemeriksaan; ?>" class="btn btn-sm btn-dark">Laporan</a>
       </td>
-
     </tr>
     <?php
      $no++;
@@ -93,8 +93,11 @@
 </table>
 </div>
 
+<?php if (@$_SESSION['hak_akses'] == 0) { ?>
+
 <a href="?view=tambah-pertumbuhan">
     <button type="button" class="btn btn-primary">Tambah</button>
 </a>
 
+<?php } ?>
 <?php } ?>

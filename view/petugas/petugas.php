@@ -1,4 +1,5 @@
 <?php if (@$_SESSION['user']) { ?>
+<?php if (@$_SESSION['hak_akses'] == 0) { ?>
 
 <script type="text/javascript">
     $(document).ready( function () {
@@ -62,5 +63,5 @@
 <a href="view/laporan/laporan-petugas.php">
     <button type="button" class="btn btn-default">Cetak Laporan</button>
 </a>
-
+<?php } ?>
 <?php } ?>

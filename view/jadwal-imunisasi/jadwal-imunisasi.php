@@ -18,7 +18,9 @@
       <th scope="col">#</th>
       <th scope="col">Kode Imunisasi</th>
       <th scope="col">Jadwal Imunisasi</th>
+      <?php if (@$_SESSION['hak_akses'] == 0) { ?>
       <th scope="col">Config</th>
+      <?php } ?>
     </tr>
   </thead>
   <tbody>
@@ -31,10 +33,12 @@
       <th scope="row"><?= $no ?></th>
       <td><?= $a->Kode_imunisasi; ?></td>
       <td><?= $a->Jadwal_imunisasi; ?></td>
+      <?php if (@$_SESSION['hak_akses'] == 0) { ?>
       <td>
           <a href="?view=rubah-imunisasi&kode=<?=$a->Kode_imunisasi; ?>" class="btn btn-sm btn-warning">Edit</a>
           <a href="?view=hapus-imunisasi&kode=<?=$a->Kode_imunisasi; ?>" class="btn btn-sm btn-danger">Hapus</a>
       </td>
+      <?php } ?>
     </tr>
     <?php
      $no++;
@@ -44,12 +48,12 @@
 </table>
 </div>
 
+<?php if (@$_SESSION['hak_akses'] == 0) { ?>
 <a href="?view=tambah-imunisasi">
     <button type="button" class="btn btn-primary">Tambah</button>
 </a>
 <a href="view/laporan/laporan-jadwal-imunisasi.php">
     <button type="button" class="btn btn-default">Cetak Laporan</button>
 </a>
-
-
+<?php } ?>
 <?php } ?>

@@ -78,13 +78,13 @@ $objAdmin = new Admin($obj);
                         <span class="menu-collapsed">Admin</span>
                       </div>
                     </a>
-                  <?php } ?>
-                <a href="?view=login-pengguna"  aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
-                    <div class="d-flex w-100 justify-content-start align-items-center">
+                    <a href="?view=login-pengguna"  aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                      <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-dashboard fa-fw mr-3"></span>
                         <span class="menu-collapsed">User</span>
-                    </div>
-                </a>
+                      </div>
+                    </a>
+                  <?php } ?>
                 <a href="?view=home" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-dashboard fa-fw mr-3"></span>
@@ -92,12 +92,14 @@ $objAdmin = new Admin($obj);
                     </div>
                 </a>
                 <?php if (@$_SESSION['user']) { ?>
+                <?php if (@$_SESSION['hak_akses'] == 0) { ?>
                 <a href="?view=petugas"  aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-dashboard fa-fw mr-3"></span>
                         <span class="menu-collapsed">Petugas</span>
                     </div>
                 </a>
+                <?php } ?>
                 <a href="?view=vaksin"  aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-dashboard fa-fw mr-3"></span>
