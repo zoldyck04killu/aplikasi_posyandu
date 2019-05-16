@@ -17,6 +17,12 @@
             <input class="form-control" type="password" placeholder="Password" name="password">
         </div>
       </div>
+      <div class="form-group row">
+        <label for="staticEmail" class="col-sm-2 col-form-label">Kode Bayi</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" placeholder="Kode Bayi" name="kode_bayi">
+        </div>
+      </div>
       <input type="hidden" name="hak_akses" value="1">
       <input type="hidden" name="blokir_pengguna" value="0">
 
@@ -32,9 +38,11 @@ if (isset($_POST['register_pengguna'])) {
   $password_hash = password_hash($password, PASSWORD_DEFAULT);
   $hak_akses = $obj->conn->real_escape_string($_POST['hak_akses']);
   $blokir_pengguna = $obj->conn->real_escape_string($_POST['blokir_pengguna']);
+  $kode_bayi = $obj->conn->real_escape_string($_POST['kode_bayi']);
+
 
   // login
-  $login = $objAdmin->register_pengguna($username, $password_hash, $hak_akses, $blokir_pengguna);
+  $login = $objAdmin->register_pengguna($username, $password_hash, $hak_akses, $blokir_pengguna,$kode_bayi);
   if ($login) {
       echo '<script>
       window.location="?view=register-pengguna";

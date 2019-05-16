@@ -10,6 +10,13 @@
     <h1>Data Pertumbuhan</h1>
     <hr>
 </div>
+<?php
+if (@$_SESSION['kode_bayi']) {
+?>
+<p>
+  <a href="?view=grafik&kode=<?=$_SESSION['kode_bayi']; ?>" class="btn btn-sm btn-info">Grafik</a>
+</p>
+<?php } ?>
 
 <div class="table-responsive" >
 <table class="table table-responsive" id="table" width="1090">
@@ -23,7 +30,6 @@
       <th scope="col">Kode Jadwal</th>
       <th scope="col">Jadwal Imunisasi</th>
       <th scope="col">Kode Vaksin</th>
-      <th scope="col">Jenis Vaksin</th>
       <th scope="col">Nama Vaksin</th>
       <th scope="col">Dosis</th>
       <th scope="col">Keterangan Vaksin</th>
@@ -46,7 +52,11 @@
   </thead>
   <tbody>
       <?php
-     $data = $objAdmin->showPertumbuhan();
+      if (@$_SESSION['kode_bayi']) {
+        $data = $objAdmin->showPertumbuhanPengguna($_SESSION['kode_bayi']);
+      }else {
+        $data = $objAdmin->showPertumbuhan();
+      }
      $no = 1;
      while ($a = $data->fetch_object()) {
          ?>
@@ -59,15 +69,14 @@
       <td><?= $a->Kode_jadwal; ?></td>
       <td><?= $a->Jadwal_imunisasi; ?></td>
       <td><?= $a->Kode_vaksin; ?></td>
-      <td><?= $a->Jenis_vaksin; ?></td>
       <td><?= $a->Nama_vaksin; ?></td>
       <td><?= $a->Dosis; ?></td>
       <td><?= $a->Keterangan_vaksin; ?></td>
       <td><?= $a->Kode_bayi; ?></td>
       <td><?= $a->Nama_bayi; ?></td>
-      <td><?= $a->Jenis_kelamin; ?></td>
-      <td><?= $a->Tgl_lahir; ?></td>
-      <td><?= $a->Umur_bayi; ?></td>
+      <td><?= $a->Jekel; ?></td>
+      <td><?= $a->Tanggal_lahir; ?></td>
+      <td><?= $a->umur_bayi.' bulan'; ?></td>
       <td><?= $a->Keterangan; ?></td>
       <td><?= $a->Keluhan; ?></td>
       <td><?= $a->Berat_badan; ?></td>

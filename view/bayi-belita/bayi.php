@@ -33,8 +33,12 @@
   </thead>
   <tbody>
       <?php
-     $data = $objAdmin->showBayi();
-     $no = 1;
+      if ($_SESSION['kode_bayi']) {
+        $data = $objAdmin->showBayiPengguna($_SESSION['kode_bayi']);
+      }else {
+        $data = $objAdmin->showBayi();
+      }
+      $no = 1;
      while ($a = $data->fetch_object()) {
          ?>
     <tr>

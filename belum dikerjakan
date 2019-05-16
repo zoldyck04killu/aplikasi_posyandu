@@ -1,0 +1,20 @@
+revisi :
+nip petugas pada tabel admin relasi ke tabel petugas[done]
+pengguna memiliki kode bayi, relasi ke tabel bayi[done]
+penguna hanya bisa melihat bayi nya saja [done]
+tambah diagram batang pertumbuhan bayi setiap bulan (diganti jadi perumur bayi sesuai jadwal pemeriksaan)
+pengguna akses apa aja ?
+
+[done]
+tabel bayi :
+hapus =
+nama petugas#
+jadwal imunisasi#
+jenis vaksin#
+nama vaksin#
+dosis#
+keterangan vaksin#
+nama bayi#
+jenis kelamin#
+tgl lahir#
+umur bayi#

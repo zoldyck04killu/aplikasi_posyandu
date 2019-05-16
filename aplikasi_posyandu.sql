@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 08, 2019 at 02:13 PM
--- Server version: 10.3.13-MariaDB
--- PHP Version: 7.3.3
+-- Generation Time: May 16, 2019 at 06:10 PM
+-- Server version: 10.3.14-MariaDB
+-- PHP Version: 7.3.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -31,15 +31,17 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `username` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hak_akses` int(2) NOT NULL
+  `hak_akses` int(2) NOT NULL,
+  `nip_petugas` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`username`, `password`, `hak_akses`) VALUES
-('admin', '$2y$10$sqvLAjqp6qUV8nbzmoIeNuvStHc9MCgxqCGE0OmaoZ2gbcn9YS1Jm', 0);
+INSERT INTO `admin` (`username`, `password`, `hak_akses`, `nip_petugas`) VALUES
+('admin', '$2y$10$sqvLAjqp6qUV8nbzmoIeNuvStHc9MCgxqCGE0OmaoZ2gbcn9YS1Jm', 0, ''),
+('petugas1', '$2y$10$/gPoFeylMPDH3fcX.hWQF./2gqkfFWZh5P5px0hh38MtoeUInjTTG', 0, '08634234');
 
 -- --------------------------------------------------------
 
@@ -65,7 +67,7 @@ CREATE TABLE `bayi` (
 --
 
 INSERT INTO `bayi` (`Kode_bayi`, `Nama_bayi`, `Jekel`, `Tempat_lahir`, `Tanggal_lahir`, `Nama_ibu`, `Umur_ibu`, `Agama`, `No_hp`, `Alamat`) VALUES
-('B001', 'Cuta Sri', 'wanita', 'Banjarmasin', '2019-04-01', 'Natasha Wilona', 29, 'Islam', '08714578345', 'Banjarmasin selatan');
+('B001', 'Cuta Sri', 'wanita', 'Banjarmasin', '2019-01-01', 'Natasha Wilona', 29, 'Islam', '08714578345', 'Banjarmasin selatan');
 
 -- --------------------------------------------------------
 
@@ -96,17 +98,16 @@ CREATE TABLE `pengguna` (
   `password` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
   `hak_akses` int(2) NOT NULL,
   `Tanggal` date NOT NULL,
-  `Blokir_pengguna` int(2) NOT NULL
+  `Blokir_pengguna` int(2) NOT NULL,
+  `kode_bayi` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `pengguna`
 --
 
-INSERT INTO `pengguna` (`username`, `password`, `hak_akses`, `Tanggal`, `Blokir_pengguna`) VALUES
-('budi', '$2y$10$yCT.EAWeING0hm9AT4JinOrJvLBYujqpSkAorGId419DIy1ARvuOa', 1, '2019-04-08', 0),
-('dana', '$2y$10$ohnx9U5U8PZ6cYWKCgxTY.U8KditeBjo/.tb9efrF8XliIVWUH.x6', 1, '2019-04-08', 0),
-('kara', '$2y$10$E//crzBjAV87vGzFXkXvJu8n9lQpz5W6Ocf0TWtYmRPIVfGw/COBC', 1, '2019-04-08', 0);
+INSERT INTO `pengguna` (`username`, `password`, `hak_akses`, `Tanggal`, `Blokir_pengguna`, `kode_bayi`) VALUES
+('wira', '$2y$10$5bHrdsMC.zMhDvnNUSJ0S.KJXaGB.ay84gtnQIUgQy.GJ1G4iKt2a', 1, '2019-05-15', 0, 'B001');
 
 -- --------------------------------------------------------
 
@@ -118,19 +119,10 @@ CREATE TABLE `pertumbuhan_bayi` (
   `No_pemeriksaan` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Tanggal` date NOT NULL,
   `Nip_petugas` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Nama_petugas` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Kode_jadwal` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Jadwal_imunisasi` date NOT NULL,
   `Kode_vaksin` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Jenis_vaksin` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Nama_vaksin` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Dosis` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Keterangan_vaksin` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Kode_bayi` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Nama_bayi` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Jenis_kelamin` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Tgl_lahir` date NOT NULL,
-  `Umur_bayi` int(10) NOT NULL,
+  `umur_bayi` int(10) NOT NULL,
   `Keterangan` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Keluhan` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Berat_badan` int(10) NOT NULL,
@@ -143,9 +135,9 @@ CREATE TABLE `pertumbuhan_bayi` (
 -- Dumping data for table `pertumbuhan_bayi`
 --
 
-INSERT INTO `pertumbuhan_bayi` (`No_pemeriksaan`, `Tanggal`, `Nip_petugas`, `Nama_petugas`, `Kode_jadwal`, `Jadwal_imunisasi`, `Kode_vaksin`, `Jenis_vaksin`, `Nama_vaksin`, `Dosis`, `Keterangan_vaksin`, `Kode_bayi`, `Nama_bayi`, `Jenis_kelamin`, `Tgl_lahir`, `Umur_bayi`, `Keterangan`, `Keluhan`, `Berat_badan`, `Lingkar_kepala`, `Lebar_badan`, `Keterangan_gizi`) VALUES
-('N001', '2019-04-17', '08634234', ' momon kurniawan', ' Imu001', '2019-04-17', 'V001', 'Gizi', 'Gizi', '2x sehari', 'minum sebelum makan', 'B001', 'Cuta Sri', 'wanita', '2019-04-01', 1, 'terserah', 'demam', 2, 25, 30, 'kurang baik'),
-('N002', '2019-03-11', '08634234', 'asas', '121', '2019-04-16', 'V001', 'asa', 'asas', 'asasa', 'sas', 'B001', 'Cuta Sri', 'wanita', '2019-04-01', 2, 'asdas', 'asas', 3, 28, 34, 'ascxadca');
+INSERT INTO `pertumbuhan_bayi` (`No_pemeriksaan`, `Tanggal`, `Nip_petugas`, `Kode_jadwal`, `Kode_vaksin`, `Kode_bayi`, `umur_bayi`, `Keterangan`, `Keluhan`, `Berat_badan`, `Lingkar_kepala`, `Lebar_badan`, `Keterangan_gizi`) VALUES
+('N001', '2019-03-05', '08634234', 'Imu001', 'V001', 'B001', 2, 'kurang gizi', 'pusing', 2, 30, 70, 'kurang baik'),
+('N002', '2019-04-09', '08634234', 'Imu001', 'V001', 'B001', 3, 'cacar air', 'gatal', 4, 40, 80, 'kurang');
 
 -- --------------------------------------------------------
 

@@ -13,18 +13,18 @@ class Admin
     $this->mysqli = $mysqli;
   }
 
-  function register_admin($username, $password_hash)
+  function register_admin($username, $password_hash,$nip_petugas)
   {
     $db = $this->mysqli->conn;
-    $db->query("INSERT INTO admin (username, password) VALUES ('$username','$password_hash')") or die ($db->error);
+    $db->query("INSERT INTO admin (username, password,hak_akses,nip_petugas) VALUES ('$username','$password_hash','0','$nip_petugas')") or die ($db->error);
     return true;
   }
 
-  function register_pengguna($username, $password_hash, $hak_akses, $blokir_pengguna)
+  function register_pengguna($username, $password_hash, $hak_akses, $blokir_pengguna,$kode_bayi)
   {
     $db = $this->mysqli->conn;
     $tanggal = date('Y/m/d');
-    $register = $db->query("INSERT INTO pengguna (username, password,hak_akses,Tanggal,Blokir_pengguna) VALUES ('$username', '$password_hash', '$hak_akses', '$tanggal', '$blokir_pengguna')") or die ($db->error);
+    $register = $db->query("INSERT INTO pengguna (username, password,hak_akses,Tanggal,Blokir_pengguna,kode_bayi) VALUES ('$username', '$password_hash', '$hak_akses', '$tanggal', '$blokir_pengguna','$kode_bayi')") or die ($db->error);
     if ($register) {
         return true;
     } else {
@@ -55,6 +55,8 @@ class Admin
           if (password_verify($password, $cek_2['password'])) {
               $_SESSION['user'] = $cek_2['username']; //session
               $_SESSION['hak_akses'] = $cek_2['hak_akses']; //session
+              $_SESSION['kode_bayi'] = $cek_2['kode_bayi']; //session
+
               return true;
           } else {
               return false; // password salah
@@ -221,6 +223,13 @@ public function showBayi(){
   return $query;
 }
 
+public function showBayiPengguna($kode_bayi){
+  $db = $this->mysqli->conn;
+  $sql = "SELECT * FROM bayi where kode_bayi = '$kode_bayi' ";
+  $query = $db->query($sql);
+  return $query;
+}
+
 public function simpanBayi($kode_bayi, $nama_bayi,$jekel,$tempat_lahir,$tanggal_lahir,$nama_ibu,$umur_ibu,$agama,$no_hp,$alamat){
     $db = $this->mysqli->conn;
     // var_dump($alamat);
@@ -268,27 +277,60 @@ public function hapusBayi($id)
 
 public function showPertumbuhan(){
   $db = $this->mysqli->conn;
-  $sql = "SELECT * FROM pertumbuhan_bayi";
+  $sql = "SELECT * FROM pertumbuhan_bayi
+            INNER JOIN petugas ON pertumbuhan_bayi.Nip_petugas = petugas.Nip_petugas
+            INNER JOIN Jadwal_imunisasi ON pertumbuhan_bayi.Kode_jadwal = Jadwal_imunisasi.Kode_imunisasi
+            INNER JOIN vaksin ON pertumbuhan_bayi.Kode_vaksin = vaksin.Kode_vaksin
+            INNER JOIN bayi ON pertumbuhan_bayi.Kode_bayi = bayi.Kode_bayi";
+  $query = $db->query($sql);
+  return $query;
+}
+
+public function showPertumbuhanPengguna($kode_bayi){
+  $db = $this->mysqli->conn;
+  $sql = "SELECT * FROM pertumbuhan_bayi
+            INNER JOIN petugas ON pertumbuhan_bayi.Nip_petugas = petugas.Nip_petugas
+            INNER JOIN Jadwal_imunisasi ON pertumbuhan_bayi.Kode_jadwal = Jadwal_imunisasi.Kode_imunisasi
+            INNER JOIN vaksin ON pertumbuhan_bayi.Kode_vaksin = vaksin.Kode_vaksin
+            INNER JOIN bayi ON pertumbuhan_bayi.Kode_bayi = bayi.Kode_bayi
+            where pertumbuhan_bayi.Kode_bayi='$kode_bayi' ";
   $query = $db->query($sql);
   return $query;
 }
 
 public function showPertumbuhan_perbayi($kode){
   $db = $this->mysqli->conn;
-  $sql = "SELECT * FROM pertumbuhan_bayi WHERE No_pemeriksaan='$kode'";
+  $sql = "SELECT * FROM pertumbuhan_bayi
+            INNER JOIN petugas ON pertumbuhan_bayi.Nip_petugas=petugas.Nip_petugas
+            INNER JOIN Jadwal_imunisasi ON pertumbuhan_bayi.Kode_jadwal=Jadwal_imunisasi.Kode_imunisasi
+            INNER JOIN vaksin ON pertumbuhan_bayi.Kode_vaksin=vaksin.Kode_vaksin
+            INNER JOIN bayi ON pertumbuhan_bayi.Kode_bayi=bayi.Kode_bayi
+            WHERE No_pemeriksaan='$kode'";
   $query = $db->query($sql);
   return $query;
 }
 
 
-public function simpanPertumbuhan($no_pemeriksaan, $tgl_pemeriksaan,$nip_petugas,$nama_petugas,$kode_jadwal,$jadwal_imunisasi,$kode_vaksin,$jens_vaksin,$nama_vaksin,$dosis,$keterangan_vaksin,$kode_bayi,$nama_bayi,$jekel_bayi,
-                    $tgl_lahir,$umur_bayi,$keterangan,$keluhan,$berat_badan,$lingkar_kepala,$lebar_badan,$keterangan_gizi){
+public function simpanPertumbuhan($no_pemeriksaan, $tgl_pemeriksaan,$nip_petugas,$kode_jadwal,$kode_vaksin,$kode_bayi,$keterangan,$keluhan,$berat_badan,$lingkar_kepala,$lebar_badan,$keterangan_gizi){
     $db = $this->mysqli->conn;
+    $sql_bayi = "SELECT Tanggal_lahir FROM bayi where kode_bayi= '$kode_bayi' ";
+    $query_bayi = $db->query($sql_bayi);
+    $a = $query_bayi->fetch_object();
+
+    $origDate = $a->Tanggal_lahir;
+    $birthDate = date("Y-m-d", strtotime($origDate));
+
+      $birthday = new DateTime($birthDate);
+      $datenew = new DateTime();
+      $diff = $birthday->diff(new DateTime($tgl_pemeriksaan));
+      $umurbayi = $diff->format('%m') + 12 * $diff->format('%y');
+      // var_dump($umurbayi);
+      // die();
     // var_dump($alamat);
     $simpanPertumbuhan = $db->query("INSERT INTO pertumbuhan_bayi
-                              (No_pemeriksaan,Tanggal,Nip_petugas,Nama_petugas,Kode_jadwal,Jadwal_imunisasi,Kode_vaksin,Jenis_vaksin,Nama_vaksin,Dosis,Keterangan_vaksin,Kode_bayi,Nama_bayi,Jenis_kelamin,Tgl_lahir,Umur_bayi,Keterangan,Keluhan,Berat_badan,Lingkar_kepala,Lebar_badan,Keterangan_gizi)
+                              (No_pemeriksaan,Tanggal,Nip_petugas,Kode_jadwal,Kode_vaksin,Kode_bayi,umur_bayi,Keterangan,Keluhan,Berat_badan,Lingkar_kepala,Lebar_badan,Keterangan_gizi)
                               VALUES
-                              ('$no_pemeriksaan', '$tgl_pemeriksaan','$nip_petugas','$nama_petugas','$kode_jadwal','$jadwal_imunisasi','$kode_vaksin','$jens_vaksin','$nama_vaksin','$dosis','$keterangan_vaksin','$kode_bayi','$nama_bayi','$jekel_bayi','$tgl_lahir','$umur_bayi','$keterangan','$keluhan','$berat_badan','$lingkar_kepala',
+                              ('$no_pemeriksaan', '$tgl_pemeriksaan','$nip_petugas','$kode_jadwal','$kode_vaksin','$kode_bayi','$umurbayi','$keterangan','$keluhan','$berat_badan','$lingkar_kepala',
                                 '$lebar_badan','$keterangan_gizi')
                               ") or die ($db->error);
     if ($simpanPertumbuhan)
@@ -306,15 +348,26 @@ public function rubahPertumbuhan($id)
    return $query;
  }
 
- public function aksiRubahPertumbuhan($no_pemeriksaan_lama,$no_pemeriksaan, $tgl_pemeriksaan,$nip_petugas,$nama_petugas,
-         $kode_jadwal,$jadwal_imunisasi,$kode_vaksin,$jens_vaksin,$nama_vaksin,$dosis,$keterangan_vaksin,$kode_bayi,$nama_bayi,
-       $jekel_bayi,$tgl_lahir,$umur_bayi,$keterangan,$keluhan,$berat_badan,$lingkar_kepala,$lebar_badan,$keterangan_gizi)
+ public function aksiRubahPertumbuhan($no_pemeriksaan_lama,$no_pemeriksaan, $tgl_pemeriksaan,$nip_petugas,
+         $kode_jadwal,$kode_vaksin,$kode_bayi,$keterangan,$keluhan,$berat_badan,$lingkar_kepala,$lebar_badan,$keterangan_gizi)
 {
 $db = $this->mysqli->conn;
+$sql_bayi = "SELECT Tanggal_lahir FROM bayi where kode_bayi= '$kode_bayi' ";
+$query_bayi = $db->query($sql_bayi);
+$a = $query_bayi->fetch_object();
+
+$origDate = $a->Tanggal_lahir;
+$birthDate = date("Y-m-d", strtotime($origDate));
+
+  $birthday = new DateTime($birthDate);
+  $datenew = new DateTime();
+  $diff = $birthday->diff(new DateTime($tgl_pemeriksaan));
+  $umurbayi = $diff->format('%m') + 12 * $diff->format('%y');
+
 $rubahPertumbuhan = $db->query("UPDATE pertumbuhan_bayi SET No_pemeriksaan='$no_pemeriksaan',Tanggal='$tgl_pemeriksaan',
-  Nip_petugas='$nip_petugas',Nama_petugas='$nama_petugas',Kode_jadwal='$kode_jadwal',Jadwal_imunisasi='$jadwal_imunisasi',
-  Kode_vaksin='$kode_vaksin',Jenis_vaksin='$jens_vaksin',Nama_vaksin='$nama_vaksin',Dosis='$dosis',Keterangan_vaksin='$keterangan_vaksin',
-  Kode_bayi='$kode_bayi',Nama_bayi='$nama_bayi',Jenis_kelamin='$jekel_bayi',Tgl_lahir='$tgl_lahir',Umur_bayi='$umur_bayi',
+  Nip_petugas='$nip_petugas',Kode_jadwal='$kode_jadwal',
+  Kode_vaksin='$kode_vaksin',
+  Kode_bayi='$kode_bayi', umur_bayi='$umurbayi',
   Keterangan='$keterangan',Keluhan='$keluhan',Berat_badan='$berat_badan',Lingkar_kepala='$lingkar_kepala',Lebar_badan='$lebar_badan',
   Keterangan_gizi='$keterangan_gizi' WHERE No_pemeriksaan = '$no_pemeriksaan_lama' ") or die ($db->error);
   if ($rubahPertumbuhan)
@@ -333,8 +386,15 @@ public function hapusPertumbuhan($id)
 
 public function grafk_pertumbuhan($kode_bayi){
   $db = $this->mysqli->conn;
-  $sql = "SELECT * FROM pertumbuhan_bayi  where Kode_bayi='$kode_bayi' ";
+  $sql = "SELECT * FROM pertumbuhan_bayi
+            INNER JOIN petugas ON pertumbuhan_bayi.Nip_petugas = petugas.Nip_petugas
+            INNER JOIN Jadwal_imunisasi ON pertumbuhan_bayi.Kode_jadwal = Jadwal_imunisasi.Kode_imunisasi
+            INNER JOIN vaksin ON pertumbuhan_bayi.Kode_vaksin = vaksin.Kode_vaksin
+            INNER JOIN bayi ON pertumbuhan_bayi.Kode_bayi = bayi.Kode_bayi  where pertumbuhan_bayi.Kode_bayi = '$kode_bayi' ";
   $query = $db->query($sql);
+  // $b = $query->fetch_object();
+  // var_dump($kode_bayi);
+  // die();
   return $query;
 }
 
