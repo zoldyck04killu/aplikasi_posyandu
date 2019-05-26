@@ -14,6 +14,12 @@
         </div>
       </div>
       <div class="form-group row">
+        <label for="staticEmail" class="col-sm-2 col-form-label" >Tanggal Vaksin</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="date" placeholder="Tanggal vaksin" name="tanggal">
+        </div>
+      </div>
+      <div class="form-group row">
         <label for="staticEmail" class="col-sm-2 col-form-label" >Nama Vaksin</label>
         <div class="col-sm-10">
             <input class="form-control" type="text" placeholder="Nama vaksin" name="nama_vaksin">
@@ -23,6 +29,12 @@
         <label for="staticEmail" class="col-sm-2 col-form-label" >Dosis</label>
         <div class="col-sm-10">
             <input class="form-control" type="text" placeholder="Dosis" name="dosis">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="staticEmail" class="col-sm-2 col-form-label" >Perberian</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" placeholder="Perberian" name="perberian">
         </div>
       </div>
       <div class="form-group row">
@@ -40,11 +52,13 @@
 if (isset($_POST['simpanVaksin']))
 {
   $kode_vaksin = $obj->conn->real_escape_string($_POST['kode_vaksin']);
+  $tanggal = $obj->conn->real_escape_string($_POST['tanggal']);
   $nama_vaksin = $obj->conn->real_escape_string($_POST['nama_vaksin']);
   $dosis = $obj->conn->real_escape_string($_POST['dosis']);
+  $perberian = $obj->conn->real_escape_string($_POST['perberian']);
   $keterangan = $obj->conn->real_escape_string($_POST['keterangan']);
 
-  $savePetugas = $objAdmin->simpanVaksin($kode_vaksin, $nama_vaksin, $dosis, $keterangan);
+  $savePetugas = $objAdmin->simpanVaksin($kode_vaksin,$tanggal, $nama_vaksin, $dosis, $perberian, $keterangan);
   if ($savePetugas) {
       echo "<script>
       swal(

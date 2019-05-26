@@ -125,13 +125,13 @@ public function showVaksin(){
   return $query;
 }
 
-public function simpanVaksin($kode_vaksin, $nama_vaksin, $dosis, $keterangan){
+public function simpanVaksin($kode_vaksin,$tanggal, $nama_vaksin, $dosis, $perberian, $keterangan){
     $db = $this->mysqli->conn;
     // var_dump($alamat);
     $simpanVaksin = $db->query("INSERT INTO vaksin
-                              (Kode_vaksin,Nama_vaksin,Dosis,Keterangan_vaksin)
+                              (Kode_vaksin,tanggal,Nama_vaksin,Dosis,perberian,Keterangan_vaksin)
                               VALUES
-                              ('$kode_vaksin', '$nama_vaksin', '$dosis', '$keterangan')
+                              ('$kode_vaksin','$tanggal', '$nama_vaksin', '$dosis', '$perberian', '$keterangan')
                               ") or die ($db->error);
     if ($simpanVaksin)
     {
@@ -148,11 +148,11 @@ public function rubahVaksin($id)
    return $query;
  }
 
- public function aksiRubahVaksin($kode_vaksin_lama,$kode_vaksin, $nama_vaksin, $dosis, $keterangan)
+ public function aksiRubahVaksin($kode_vaksin_lama,$kode_vaksin,$tanggal, $nama_vaksin, $dosis,$perberian, $keterangan)
 {
 $db = $this->mysqli->conn;
-$rubahPetugas = $db->query("UPDATE vaksin SET Kode_vaksin='$kode_vaksin',Nama_vaksin='$nama_vaksin',Dosis='$dosis',
-                                    Keterangan_vaksin='$keterangan' WHERE Kode_vaksin = '$kode_vaksin_lama' ") or die ($db->error);
+$rubahPetugas = $db->query("UPDATE vaksin SET Kode_vaksin='$kode_vaksin',tanggal='$tanggal',Nama_vaksin='$nama_vaksin',Dosis='$dosis',
+                                    perberian='$perberian',Keterangan_vaksin='$keterangan' WHERE Kode_vaksin = '$kode_vaksin_lama' ") or die ($db->error);
   if ($rubahPetugas)
   {
     return true;
@@ -230,13 +230,13 @@ public function showBayiPengguna($kode_bayi){
   return $query;
 }
 
-public function simpanBayi($kode_bayi, $nama_bayi,$jekel,$tempat_lahir,$tanggal_lahir,$nama_ibu,$umur_ibu,$agama,$no_hp,$alamat){
+public function simpanBayi($kode_bayi, $nama_bayi,$jekel,$tempat_lahir,$tanggal_lahir,$nama_ortu,$umur_bayi,$agama,$no_hp,$alamat){
     $db = $this->mysqli->conn;
     // var_dump($alamat);
     $simpanBayi = $db->query("INSERT INTO bayi
-                              (Kode_bayi,Nama_bayi,Jekel,Tempat_lahir,Tanggal_lahir,Nama_ibu,Umur_ibu,Agama,No_hp,Alamat)
+                              (Kode_bayi,Nama_bayi,Jekel,Tempat_lahir,Tanggal_lahir,Nama_ortu,Umur_bayi,Agama,No_hp,Alamat)
                               VALUES
-                              ('$kode_bayi', '$nama_bayi','$jekel','$tempat_lahir','$tanggal_lahir','$nama_ibu','$umur_ibu','$agama','$no_hp','$alamat')
+                              ('$kode_bayi', '$nama_bayi','$jekel','$tempat_lahir','$tanggal_lahir','$nama_ortu','$umur_bayi','$agama','$no_hp','$alamat')
                               ") or die ($db->error);
     if ($simpanBayi)
     {
@@ -253,11 +253,11 @@ public function rubahBayi($id)
    return $query;
  }
 
- public function aksiRubahBayi($kode_bayi_lama,$kode_bayi, $nama_bayi,$jekel,$tempat_lahir,$tanggal_lahir,$nama_ibu,$umur_ibu,$agama,$no_hp,$alamat)
+ public function aksiRubahBayi($kode_bayi_lama,$kode_bayi, $nama_bayi,$jekel,$tempat_lahir,$tanggal_lahir,$nama_ortu,$umur_bayi,$agama,$no_hp,$alamat)
 {
 $db = $this->mysqli->conn;
 $rubahBayi = $db->query("UPDATE bayi SET Kode_bayi='$kode_bayi',Nama_bayi='$nama_bayi',Jekel='$jekel',Tempat_lahir='$tempat_lahir',Tanggal_lahir='$tanggal_lahir',
-  Nama_ibu='$nama_ibu',Umur_ibu='$umur_ibu',Agama='$agama',No_hp='$no_hp',Alamat='$alamat'
+  Nama_ortu='$nama_ortu',Umur_bayi='$umur_bayi',Agama='$agama',No_hp='$no_hp',Alamat='$alamat'
   WHERE Kode_bayi = '$kode_bayi_lama' ") or die ($db->error);
   if ($rubahBayi)
   {
@@ -311,7 +311,7 @@ public function showPertumbuhan_perbayi($kode){
 }
 
 
-public function simpanPertumbuhan($no_pemeriksaan, $tgl_pemeriksaan,$nip_petugas,$kode_jadwal,$kode_vaksin,$kode_bayi,$keterangan,$keluhan,$berat_badan,$lingkar_kepala,$lebar_badan,$keterangan_gizi){
+public function simpanPertumbuhan($no_pemeriksaan, $tgl_pemeriksaan,$nip_petugas,$kode_jadwal,$kode_vaksin,$kode_bayi,$keterangan,$keluhan,$berat_badan,$lingkar_kepala,$tinggi_badan,$keterangan_gizi){
     $db = $this->mysqli->conn;
     $sql_bayi = "SELECT Tanggal_lahir FROM bayi where kode_bayi= '$kode_bayi' ";
     $query_bayi = $db->query($sql_bayi);
@@ -328,10 +328,10 @@ public function simpanPertumbuhan($no_pemeriksaan, $tgl_pemeriksaan,$nip_petugas
       // die();
     // var_dump($alamat);
     $simpanPertumbuhan = $db->query("INSERT INTO pertumbuhan_bayi
-                              (No_pemeriksaan,Tanggal,Nip_petugas,Kode_jadwal,Kode_vaksin,Kode_bayi,umur_bayi,Keterangan,Keluhan,Berat_badan,Lingkar_kepala,Lebar_badan,Keterangan_gizi)
+                              (No_pemeriksaan,Tanggal,Nip_petugas,Kode_jadwal,Kode_vaksin,Kode_bayi,umur_bayi,Keterangan,Keluhan,Berat_badan,Tinggi_badan,Lingkar_kepala,Keterangan_gizi)
                               VALUES
-                              ('$no_pemeriksaan', '$tgl_pemeriksaan','$nip_petugas','$kode_jadwal','$kode_vaksin','$kode_bayi','$umurbayi','$keterangan','$keluhan','$berat_badan','$lingkar_kepala',
-                                '$lebar_badan','$keterangan_gizi')
+                              ('$no_pemeriksaan', '$tgl_pemeriksaan','$nip_petugas','$kode_jadwal','$kode_vaksin','$kode_bayi','$umurbayi','$keterangan','$keluhan','$berat_badan','$tinggi_badan','$lingkar_kepala',
+                                '$keterangan_gizi')
                               ") or die ($db->error);
     if ($simpanPertumbuhan)
     {
@@ -348,8 +348,7 @@ public function rubahPertumbuhan($id)
    return $query;
  }
 
- public function aksiRubahPertumbuhan($no_pemeriksaan_lama,$no_pemeriksaan, $tgl_pemeriksaan,$nip_petugas,
-         $kode_jadwal,$kode_vaksin,$kode_bayi,$keterangan,$keluhan,$berat_badan,$lingkar_kepala,$lebar_badan,$keterangan_gizi)
+ public function aksiRubahPertumbuhan($no_pemeriksaan_lama,$no_pemeriksaan, $tgl_pemeriksaan,$nip_petugas,$kode_jadwal,$kode_vaksin,$kode_bayi,$umur_bayi,$berat_badan,$tinggi_badan,$lingkar_kepala,$keterangan_gizi,$keterangan,$keluhan)
 {
 $db = $this->mysqli->conn;
 $sql_bayi = "SELECT Tanggal_lahir FROM bayi where kode_bayi= '$kode_bayi' ";
@@ -368,7 +367,7 @@ $rubahPertumbuhan = $db->query("UPDATE pertumbuhan_bayi SET No_pemeriksaan='$no_
   Nip_petugas='$nip_petugas',Kode_jadwal='$kode_jadwal',
   Kode_vaksin='$kode_vaksin',
   Kode_bayi='$kode_bayi', umur_bayi='$umurbayi',
-  Keterangan='$keterangan',Keluhan='$keluhan',Berat_badan='$berat_badan',Lingkar_kepala='$lingkar_kepala',Lebar_badan='$lebar_badan',
+  Keterangan='$keterangan',Keluhan='$keluhan',Berat_badan='$berat_badan',Tinggi_badan='$tinggi_badan',Lingkar_kepala='$lingkar_kepala',
   Keterangan_gizi='$keterangan_gizi' WHERE No_pemeriksaan = '$no_pemeriksaan_lama' ") or die ($db->error);
   if ($rubahPertumbuhan)
   {

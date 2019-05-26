@@ -21,8 +21,8 @@
       <th scope="col">Jekel</th>
       <th scope="col">Tempat_lahir</th>
       <th scope="col">Tanggal_lahir</th>
-      <th scope="col">Nama Ibu</th>
-      <th scope="col">Umur Ibu</th>
+      <th scope="col">Nama Ortu</th>
+      <th scope="col">Umur Bayi</th>
       <th scope="col">Agama</th>
       <th scope="col">No Hp</th>
       <th scope="col">Alamat</th>
@@ -33,7 +33,7 @@
   </thead>
   <tbody>
       <?php
-      if ($_SESSION['kode_bayi']) {
+      if (@$_SESSION['kode_bayi']) {
         $data = $objAdmin->showBayiPengguna($_SESSION['kode_bayi']);
       }else {
         $data = $objAdmin->showBayi();
@@ -48,8 +48,8 @@
       <td><?= $a->Jekel; ?></td>
       <td><?= $a->Tempat_lahir; ?></td>
       <td><?= $a->Tanggal_lahir; ?></td>
-      <td><?= $a->Nama_ibu; ?></td>
-      <td><?= $a->Umur_ibu; ?></td>
+      <td><?= $a->Nama_ortu; ?></td>
+      <td><?= $a->Umur_bayi; ?></td>
       <td><?= $a->Agama; ?></td>
       <td><?= $a->No_hp; ?></td>
       <td><?= $a->Alamat; ?></td>

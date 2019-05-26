@@ -17,8 +17,10 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Kode Vaksin</th>
+      <th scope="col">Tanggal Vaksin</th>
       <th scope="col">Nama Vaksin</th>
       <th scope="col">Dosis</th>
+      <th scope="col">Perberian</th>
       <th scope="col">Keterangan Vaksin</th>
       <?php if (@$_SESSION['hak_akses'] == 0) { ?>
       <th scope="col">Config</th>
@@ -34,8 +36,10 @@
     <tr>
       <th scope="row"><?= $no ?></th>
       <td><?= $a->Kode_vaksin; ?></td>
+      <td><?= $a->tanggal; ?></td>
       <td><?= $a->Nama_vaksin; ?></td>
       <td><?= $a->Dosis; ?></td>
+      <td><?= $a->perberian; ?></td>
       <td><?= $a->Keterangan_vaksin; ?></td>
       <?php if (@$_SESSION['hak_akses'] == 0) { ?>
       <td>

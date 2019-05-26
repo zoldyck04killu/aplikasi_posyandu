@@ -74,6 +74,38 @@ $a = $data->fetch_object();
        </div>
 
        <div class="form-group row">
+           <label for="staticEmail" class="col-sm-2 col-form-label" >Umur Bayi</label>
+           <div class="col-sm-10">
+             <input class="form-control" type="text" placeholder="umur Bayi" name="umur_bayi" value="<?= $a->umur_bayi; ?>" disable>
+               <input class="form-control" type="hidden" placeholder="umur Bayi" name="umur_bayi" value="<?= $a->umur_bayi; ?>">
+           </div>
+       </div>
+       <div class="form-group row">
+           <label for="staticEmail" class="col-sm-2 col-form-label" >Berat Badan</label>
+           <div class="col-sm-10">
+               <input class="form-control" type="text" placeholder="Berat Badan" name="berat_badan" value="<?= $a->Berat_badan; ?>">
+           </div>
+       </div>
+       <div class="form-group row">
+           <label for="staticEmail" class="col-sm-2 col-form-label" >Tinggi Badan</label>
+           <div class="col-sm-10">
+               <input class="form-control" type="text" placeholder="Tinggi Badan" name="tinggi_badan" value="<?= $a->Tinggi_badan; ?>">
+           </div>
+       </div>
+       <div class="form-group row">
+           <label for="staticEmail" class="col-sm-2 col-form-label" >Lingkar Kepala</label>
+           <div class="col-sm-10">
+               <input class="form-control" type="text" placeholder="Lingkar Kepala" name="lingkar_kepala" value="<?= $a->Lingkar_kepala; ?>">
+           </div>
+       </div>
+
+       <div class="form-group row">
+         <label for="staticEmail" class="col-sm-2 col-form-label" >Keterangan Gizi</label>
+         <div class="col-sm-10">
+           <input class="form-control" type="text" placeholder="Keterangan Gizi" name="keterangan_gizi" value="<?= $a->Keterangan_gizi; ?>" >
+         </div>
+       </div>
+       <div class="form-group row">
            <label for="staticEmail" class="col-sm-2 col-form-label" >Keterangan</label>
            <div class="col-sm-10">
                <input class="form-control" type="text" placeholder="Keterangan" name="keterangan" value="<?= $a->Keterangan; ?>">
@@ -85,30 +117,7 @@ $a = $data->fetch_object();
                <input class="form-control" type="text" placeholder="Keluhan" name="keluhan" value="<?= $a->Keluhan; ?>">
            </div>
        </div>
-       <div class="form-group row">
-           <label for="staticEmail" class="col-sm-2 col-form-label" >Berat Badan</label>
-           <div class="col-sm-10">
-               <input class="form-control" type="text" placeholder="Berat Badan" name="berat_badan" value="<?= $a->Berat_badan; ?>">
-           </div>
-       </div>
-       <div class="form-group row">
-           <label for="staticEmail" class="col-sm-2 col-form-label" >Lingkar Kepala</label>
-           <div class="col-sm-10">
-               <input class="form-control" type="text" placeholder="Lingkar Kepala" name="lingkar_kepala" value="<?= $a->Lingkar_kepala; ?>">
-           </div>
-       </div>
-       <div class="form-group row">
-           <label for="staticEmail" class="col-sm-2 col-form-label" >Lebar Badan</label>
-           <div class="col-sm-10">
-               <input class="form-control" type="text" placeholder="Lebar Badan" name="lebar_badan" value="<?= $a->Lebar_badan; ?>" >
-           </div>
-       </div>
-       <div class="form-group row">
-           <label for="staticEmail" class="col-sm-2 col-form-label" >Keterangan Gizi</label>
-           <div class="col-sm-10">
-               <input class="form-control" type="text" placeholder="Keterangan Gizi" name="keterangan_gizi" value="<?= $a->Keterangan_gizi; ?>" >
-           </div>
-       </div>
+
 
        <button type="submit" class="btn btn-primary" name="rubahPertumbuhan">Simpan</button>
 
@@ -127,15 +136,15 @@ $a = $data->fetch_object();
    $kode_vaksin = $obj->conn->real_escape_string($_POST['kode_vaksin']);
 
    $kode_bayi = $obj->conn->real_escape_string($_POST['kode_bayi']);
-
+   $umur_bayi = $obj->conn->real_escape_string($_POST['umur_bayi']);
+   $berat_badan = $obj->conn->real_escape_string($_POST['berat_badan']);
+   $tinggi_badan = $obj->conn->real_escape_string($_POST['tinggi_badan']);
+   $lingkar_kepala = $obj->conn->real_escape_string($_POST['lingkar_kepala']);
+   $keterangan_gizi = $obj->conn->real_escape_string($_POST['keterangan_gizi']);
    $keterangan = $obj->conn->real_escape_string($_POST['keterangan']);
    $keluhan = $obj->conn->real_escape_string($_POST['keluhan']);
-   $berat_badan = $obj->conn->real_escape_string($_POST['berat_badan']);
-   $lingkar_kepala = $obj->conn->real_escape_string($_POST['lingkar_kepala']);
-   $lebar_badan = $obj->conn->real_escape_string($_POST['lebar_badan']);
-   $keterangan_gizi = $obj->conn->real_escape_string($_POST['keterangan_gizi']);
 
-   $rubahPertumbuhan = $objAdmin->aksiRubahPertumbuhan($no_pemeriksaan_lama,$no_pemeriksaan, $tgl_pemeriksaan,$nip_petugas,$kode_jadwal,$kode_vaksin,$kode_bayi,$keterangan,$keluhan,$berat_badan,$lingkar_kepala,$lebar_badan,$keterangan_gizi);
+   $rubahPertumbuhan = $objAdmin->aksiRubahPertumbuhan($no_pemeriksaan_lama,$no_pemeriksaan, $tgl_pemeriksaan,$nip_petugas,$kode_jadwal,$kode_vaksin,$kode_bayi,$umur_bayi,$berat_badan,$tinggi_badan,$lingkar_kepala,$keterangan_gizi,$keterangan,$keluhan);
    if ($rubahPertumbuhan) {
        echo "<script>
        swal(

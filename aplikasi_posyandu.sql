@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 16, 2019 at 06:10 PM
+-- Generation Time: May 26, 2019 at 05:35 AM
 -- Server version: 10.3.14-MariaDB
 -- PHP Version: 7.3.4
 
@@ -55,8 +55,8 @@ CREATE TABLE `bayi` (
   `Jekel` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Tempat_lahir` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Tanggal_lahir` date NOT NULL,
-  `Nama_ibu` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Umur_ibu` int(10) NOT NULL,
+  `Nama_ortu` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Umur_bayi` int(10) NOT NULL,
   `Agama` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `No_hp` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Alamat` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
@@ -66,8 +66,9 @@ CREATE TABLE `bayi` (
 -- Dumping data for table `bayi`
 --
 
-INSERT INTO `bayi` (`Kode_bayi`, `Nama_bayi`, `Jekel`, `Tempat_lahir`, `Tanggal_lahir`, `Nama_ibu`, `Umur_ibu`, `Agama`, `No_hp`, `Alamat`) VALUES
-('B001', 'Cuta Sri', 'wanita', 'Banjarmasin', '2019-01-01', 'Natasha Wilona', 29, 'Islam', '08714578345', 'Banjarmasin selatan');
+INSERT INTO `bayi` (`Kode_bayi`, `Nama_bayi`, `Jekel`, `Tempat_lahir`, `Tanggal_lahir`, `Nama_ortu`, `Umur_bayi`, `Agama`, `No_hp`, `Alamat`) VALUES
+('B001', 'Cuta Sri', 'pria', 'Banjarmasin', '2019-01-01', 'Natasha Wilona aaa', 5, 'Islam', '08714578345', 'Banjarmasin selatan'),
+('B002', 'asas', 'pria', 'ttt', '2019-03-11', 'sdcasca', 5, 'Islam', '9867563452', 'jkn');
 
 -- --------------------------------------------------------
 
@@ -126,8 +127,8 @@ CREATE TABLE `pertumbuhan_bayi` (
   `Keterangan` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Keluhan` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Berat_badan` int(10) NOT NULL,
+  `Tinggi_badan` int(13) NOT NULL,
   `Lingkar_kepala` int(20) NOT NULL,
-  `Lebar_badan` int(20) NOT NULL,
   `Keterangan_gizi` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -135,9 +136,10 @@ CREATE TABLE `pertumbuhan_bayi` (
 -- Dumping data for table `pertumbuhan_bayi`
 --
 
-INSERT INTO `pertumbuhan_bayi` (`No_pemeriksaan`, `Tanggal`, `Nip_petugas`, `Kode_jadwal`, `Kode_vaksin`, `Kode_bayi`, `umur_bayi`, `Keterangan`, `Keluhan`, `Berat_badan`, `Lingkar_kepala`, `Lebar_badan`, `Keterangan_gizi`) VALUES
-('N001', '2019-03-05', '08634234', 'Imu001', 'V001', 'B001', 2, 'kurang gizi', 'pusing', 2, 30, 70, 'kurang baik'),
-('N002', '2019-04-09', '08634234', 'Imu001', 'V001', 'B001', 3, 'cacar air', 'gatal', 4, 40, 80, 'kurang');
+INSERT INTO `pertumbuhan_bayi` (`No_pemeriksaan`, `Tanggal`, `Nip_petugas`, `Kode_jadwal`, `Kode_vaksin`, `Kode_bayi`, `umur_bayi`, `Keterangan`, `Keluhan`, `Berat_badan`, `Tinggi_badan`, `Lingkar_kepala`, `Keterangan_gizi`) VALUES
+('N001', '2019-03-05', '08634234', 'Imu001', 'V001', 'B001', 2, 'kurang gizi', 'pusing', 2, 0, 30, 'kurang baik'),
+('N002', '2019-04-09', '08634234', 'Imu001', 'V001', 'B001', 3, 'cacar air', 'gatal', 4, 0, 40, 'kurang'),
+('N003', '2019-05-14', '08634234', 'Imu001', 'V001', 'B002', 2, 'fdsvfs baru', 'sdcasw baru', 5, 55, 40, 'cukup baru');
 
 -- --------------------------------------------------------
 
@@ -171,8 +173,10 @@ INSERT INTO `petugas` (`Nip_petugas`, `Nama_petugas`, `Jabatan`, `Jenis_kelamin`
 
 CREATE TABLE `vaksin` (
   `Kode_vaksin` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tanggal` date NOT NULL,
   `Nama_vaksin` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Dosis` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `perberian` int(5) NOT NULL,
   `Keterangan_vaksin` text COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -180,8 +184,8 @@ CREATE TABLE `vaksin` (
 -- Dumping data for table `vaksin`
 --
 
-INSERT INTO `vaksin` (`Kode_vaksin`, `Nama_vaksin`, `Dosis`, `Keterangan_vaksin`) VALUES
-('V001', 'Gizi', '2x sehari', 'minum sebelum makan');
+INSERT INTO `vaksin` (`Kode_vaksin`, `tanggal`, `Nama_vaksin`, `Dosis`, `perberian`, `Keterangan_vaksin`) VALUES
+('V001', '2019-05-06', 'Gizi', '2x sehari', 2, 'minum sebelum makan');
 
 --
 -- Indexes for dumped tables

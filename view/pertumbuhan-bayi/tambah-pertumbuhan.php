@@ -63,18 +63,6 @@
           </div>
       </div>
       <div class="form-group row">
-          <label for="staticEmail" class="col-sm-2 col-form-label" >Keterangan</label>
-          <div class="col-sm-10">
-              <input class="form-control" type="text" placeholder="Keterangan" name="keterangan">
-          </div>
-      </div>
-      <div class="form-group row">
-          <label for="staticEmail" class="col-sm-2 col-form-label" >Keluhan</label>
-          <div class="col-sm-10">
-              <input class="form-control" type="text" placeholder="Keluhan" name="keluhan" >
-          </div>
-      </div>
-      <div class="form-group row">
           <label for="staticEmail" class="col-sm-2 col-form-label" >Berat Badan</label>
           <div class="col-sm-10">
               <input class="form-control" type="text" placeholder="Berat Badan" name="berat_badan" >
@@ -87,9 +75,9 @@
           </div>
       </div>
       <div class="form-group row">
-          <label for="staticEmail" class="col-sm-2 col-form-label" >Lebar Badan</label>
+          <label for="staticEmail" class="col-sm-2 col-form-label" >Tinggi Badan</label>
           <div class="col-sm-10">
-              <input class="form-control" type="text" placeholder="Lebar Badan" name="lebar_badan" >
+              <input class="form-control" type="text" placeholder="Tinggi Badan" name="tinggi_badan" >
           </div>
       </div>
       <div class="form-group row">
@@ -98,6 +86,20 @@
               <input class="form-control" type="text" placeholder="Keterangan Gizi" name="keterangan_gizi" >
           </div>
       </div>
+      <div class="form-group row">
+          <label for="staticEmail" class="col-sm-2 col-form-label" >Keterangan</label>
+          <div class="col-sm-10">
+              <input class="form-control" type="text" placeholder="Keterangan" name="keterangan">
+          </div>
+      </div>
+      <div class="form-group row">
+          <label for="staticEmail" class="col-sm-2 col-form-label" >Keluhan</label>
+          <div class="col-sm-10">
+              <input class="form-control" type="text" placeholder="Keluhan" name="keluhan" >
+          </div>
+      </div>
+
+
 
       <button type="submit" class="btn btn-primary" name="simpanPertumbuhan">Simpan</button>
 
@@ -116,10 +118,10 @@ if (isset($_POST['simpanPertumbuhan']))
   $keluhan = $obj->conn->real_escape_string($_POST['keluhan']);
   $berat_badan = $obj->conn->real_escape_string($_POST['berat_badan']);
   $lingkar_kepala = $obj->conn->real_escape_string($_POST['lingkar_kepala']);
-  $lebar_badan = $obj->conn->real_escape_string($_POST['lebar_badan']);
+  $tinggi_badan = $obj->conn->real_escape_string($_POST['tinggi_badan']);
   $keterangan_gizi = $obj->conn->real_escape_string($_POST['keterangan_gizi']);
 
-  $simpanPertumbuhan = $objAdmin->simpanPertumbuhan($no_pemeriksaan, $tgl_pemeriksaan,$nip_petugas,$kode_jadwal,$kode_vaksin,$kode_bayi,$keterangan,$keluhan,$berat_badan,$lingkar_kepala,$lebar_badan,$keterangan_gizi);
+  $simpanPertumbuhan = $objAdmin->simpanPertumbuhan($no_pemeriksaan, $tgl_pemeriksaan,$nip_petugas,$kode_jadwal,$kode_vaksin,$kode_bayi,$keterangan,$keluhan,$berat_badan,$lingkar_kepala,$tinggi_badan,$keterangan_gizi);
   if ($simpanPertumbuhan) {
       echo "<script>
       swal(
