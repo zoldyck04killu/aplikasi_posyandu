@@ -99,13 +99,13 @@ $objAdmin = new Admin($obj);
                         <span class="menu-collapsed">Petugas</span>
                     </div>
                 </a>
-                <?php } ?>
                 <a href="?view=vaksin"  aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-dashboard fa-fw mr-3"></span>
                         <span class="menu-collapsed">Vaksin</span>
                     </div>
                 </a>
+                <?php } ?>
                 <a href="?view=jadwal-imunisasi"  aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-dashboard fa-fw mr-3"></span>

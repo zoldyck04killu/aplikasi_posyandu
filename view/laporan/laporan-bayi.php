@@ -65,8 +65,8 @@ $html=<<<EOD
           <th>Jekel</th>
           <th>Tempat Lahir</th>
           <th>Tanggal Lahir</th>
-          <th width="100">Nama Ibu</th>
-          <th>Umur Ibu</th>
+          <th width="100">Nama Ortu</th>
+          <th>Umur Bayi</th>
           <th>Agama</th>
           <th>No Hp</th>
           <th width="120">Alamat</th>
@@ -98,8 +98,8 @@ $no = 1;
             <td>'.$data->Jekel.'</td>
             <td>'.$data->Tempat_lahir.'</td>
             <td>'.$data->Tanggal_lahir.'</td>
-            <td width="100">'.$data->Nama_ibu.'</td>
-            <td>'.$data->Umur_ibu.'</td>
+            <td width="100">'.$data->Nama_ortu.'</td>
+            <td>'.$data->Umur_bayi.'</td>
             <td>'.$data->Agama.'</td>
             <td>'.$data->No_hp.'</td>
             <td width="120">'.$data->Alamat.'
