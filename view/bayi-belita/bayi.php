@@ -7,12 +7,12 @@
 </script>
 
 <div class="header-hal">
-    <h1>Data Bayi Dan Belita</h1>
+    <h1>Data Bayi Dan Balita</h1>
     <hr>
 </div>
 
 <div class="table-responsive" >
-<table class="table table-responsive" id="table" width="1090">
+<table class="table table-responsive" id="table" width="1050">
   <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>

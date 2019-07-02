@@ -169,7 +169,7 @@ public function hapusVaksin($id)
 
 public function showImunisasi(){
   $db = $this->mysqli->conn;
-  $sql = "SELECT * FROM Jadwal_imunisasi";
+  $sql = "SELECT * FROM jadwal_imunisasi";
   $query = $db->query($sql);
   return $query;
 }
@@ -277,23 +277,14 @@ public function hapusBayi($id)
 
 public function showPertumbuhan(){
   $db = $this->mysqli->conn;
-  $sql = "SELECT * FROM pertumbuhan_bayi
-            INNER JOIN petugas ON pertumbuhan_bayi.Nip_petugas = petugas.Nip_petugas
-            INNER JOIN Jadwal_imunisasi ON pertumbuhan_bayi.Kode_jadwal = Jadwal_imunisasi.Kode_imunisasi
-            INNER JOIN vaksin ON pertumbuhan_bayi.Kode_vaksin = vaksin.Kode_vaksin
-            INNER JOIN bayi ON pertumbuhan_bayi.Kode_bayi = bayi.Kode_bayi";
+  $sql = "SELECT * FROM pertumbuhan_bayi";
   $query = $db->query($sql);
   return $query;
 }
 
 public function showPertumbuhanPengguna($kode_bayi){
   $db = $this->mysqli->conn;
-  $sql = "SELECT * FROM pertumbuhan_bayi
-            INNER JOIN petugas ON pertumbuhan_bayi.Nip_petugas = petugas.Nip_petugas
-            INNER JOIN Jadwal_imunisasi ON pertumbuhan_bayi.Kode_jadwal = Jadwal_imunisasi.Kode_imunisasi
-            INNER JOIN vaksin ON pertumbuhan_bayi.Kode_vaksin = vaksin.Kode_vaksin
-            INNER JOIN bayi ON pertumbuhan_bayi.Kode_bayi = bayi.Kode_bayi
-            where pertumbuhan_bayi.Kode_bayi='$kode_bayi' ";
+  $sql = "SELECT * FROM pertumbuhan_bayi  where pertumbuhan_bayi.Kode_bayi='$kode_bayi' ";
   $query = $db->query($sql);
   return $query;
 }
@@ -301,10 +292,6 @@ public function showPertumbuhanPengguna($kode_bayi){
 public function showPertumbuhan_perbayi($kode){
   $db = $this->mysqli->conn;
   $sql = "SELECT * FROM pertumbuhan_bayi
-            INNER JOIN petugas ON pertumbuhan_bayi.Nip_petugas=petugas.Nip_petugas
-            INNER JOIN Jadwal_imunisasi ON pertumbuhan_bayi.Kode_jadwal=Jadwal_imunisasi.Kode_imunisasi
-            INNER JOIN vaksin ON pertumbuhan_bayi.Kode_vaksin=vaksin.Kode_vaksin
-            INNER JOIN bayi ON pertumbuhan_bayi.Kode_bayi=bayi.Kode_bayi
             WHERE No_pemeriksaan='$kode'";
   $query = $db->query($sql);
   return $query;
@@ -350,6 +337,8 @@ public function rubahPertumbuhan($id)
 
  public function aksiRubahPertumbuhan($no_pemeriksaan_lama,$no_pemeriksaan, $tgl_pemeriksaan,$nip_petugas,$kode_jadwal,$kode_vaksin,$kode_bayi,$umur_bayi,$berat_badan,$tinggi_badan,$lingkar_kepala,$keterangan_gizi,$keterangan,$keluhan)
 {
+  // var_dump($umur_bayi);
+  // die();
 $db = $this->mysqli->conn;
 $sql_bayi = "SELECT Tanggal_lahir FROM bayi where kode_bayi= '$kode_bayi' ";
 $query_bayi = $db->query($sql_bayi);
@@ -385,11 +374,7 @@ public function hapusPertumbuhan($id)
 
 public function grafk_pertumbuhan($kode_bayi){
   $db = $this->mysqli->conn;
-  $sql = "SELECT * FROM pertumbuhan_bayi
-            INNER JOIN petugas ON pertumbuhan_bayi.Nip_petugas = petugas.Nip_petugas
-            INNER JOIN Jadwal_imunisasi ON pertumbuhan_bayi.Kode_jadwal = Jadwal_imunisasi.Kode_imunisasi
-            INNER JOIN vaksin ON pertumbuhan_bayi.Kode_vaksin = vaksin.Kode_vaksin
-            INNER JOIN bayi ON pertumbuhan_bayi.Kode_bayi = bayi.Kode_bayi  where pertumbuhan_bayi.Kode_bayi = '$kode_bayi' ";
+  $sql = "SELECT * FROM pertumbuhan_bayi  where Kode_bayi = '$kode_bayi' ";
   $query = $db->query($sql);
   // $b = $query->fetch_object();
   // var_dump($kode_bayi);

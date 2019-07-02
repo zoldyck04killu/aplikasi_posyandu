@@ -62,6 +62,12 @@
               <input class="form-control" type="text" placeholder="Kode Bayi" name="kode_bayi">
           </div>
       </div>
+      <!-- <div class="form-group row">
+          <label for="staticEmail" class="col-sm-2 col-form-label" >Umur Bayi</label>
+          <div class="col-sm-10">
+              <input class="form-control" type="text" placeholder="umur Bayi" name="umur_bayi" >
+          </div>
+      </div> -->
       <div class="form-group row">
           <label for="staticEmail" class="col-sm-2 col-form-label" >Berat Badan</label>
           <div class="col-sm-10">
@@ -114,6 +120,8 @@ if (isset($_POST['simpanPertumbuhan']))
   $kode_jadwal = $obj->conn->real_escape_string($_POST['kode_jadwal']);
   $kode_vaksin = $obj->conn->real_escape_string($_POST['kode_vaksin']);
   $kode_bayi = $obj->conn->real_escape_string($_POST['kode_bayi']);
+  // $umur_bayi = $obj->conn->real_escape_string($_POST['umur_bayi']);
+
   $keterangan = $obj->conn->real_escape_string($_POST['keterangan']);
   $keluhan = $obj->conn->real_escape_string($_POST['keluhan']);
   $berat_badan = $obj->conn->real_escape_string($_POST['berat_badan']);

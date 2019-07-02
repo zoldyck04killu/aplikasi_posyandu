@@ -76,8 +76,8 @@ $a = $data->fetch_object();
        <div class="form-group row">
            <label for="staticEmail" class="col-sm-2 col-form-label" >Umur Bayi</label>
            <div class="col-sm-10">
-             <input class="form-control" type="text" placeholder="umur Bayi" name="umur_bayi" value="<?= $a->umur_bayi; ?>" disable>
-               <input class="form-control" type="hidden" placeholder="umur Bayi" name="umur_bayi" value="<?= $a->umur_bayi; ?>">
+             <input class="form-control" type="text" placeholder="umur Bayi" name="umur_bayi" value="<?= $a->umur_bayi; ?>" disabled>
+               <!-- <input class="form-control" type="hidden" placeholder="umur Bayi" name="umur_bayi" value="<?= $a->umur_bayi; ?>"> -->
            </div>
        </div>
        <div class="form-group row">

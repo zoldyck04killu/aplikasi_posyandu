@@ -18,7 +18,7 @@
       <th scope="col">#</th>
       <th scope="col">Kode Vaksin</th>
       <th scope="col">Tanggal Vaksin</th>
-      <th scope="col">Nama Vaksin</th>
+      <th scope="col">Jenis Vaksin</th>
       <th scope="col">Dosis</th>
       <th scope="col">Perberian</th>
       <th scope="col">Keterangan Vaksin</th>

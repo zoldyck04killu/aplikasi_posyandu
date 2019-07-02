@@ -19,7 +19,7 @@ if (@$_SESSION['kode_bayi']) {
 <?php } ?>
 
 <div class="table-responsive" >
-<table class="table table-responsive" id="table" width="1090">
+<table class="table table-responsive" id="table" width="1050">
   <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
@@ -33,7 +33,7 @@ if (@$_SESSION['kode_bayi']) {
       <th scope="col">Berat Badan</th>
       <th scope="col">Tingi Badan</th>
       <th scope="col">Lingkar Kepala</th>
-      <th scope="col">Keterangan Gizi</th>
+      <th scope="col">Status Gizi</th>
       <th scope="col">Keterangan</th>
       <th scope="col">Keluhan</th>
       <?php if (@$_SESSION['hak_akses'] == 0) { ?>

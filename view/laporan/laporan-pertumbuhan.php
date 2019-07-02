@@ -49,7 +49,7 @@ $pdf->SetFont('helvetica', '', 14, '', true);
 
 $pdf->AddPage();
 
-$pdf->Ln(0);
+$pdf->Ln(-10);
 $pdf->SetX(210);
 $pdf->Cell(60,0, 'Tempat Posyandu, '.date("d-m-Y"), 0, 1, 'L', 0, '', 0); // untuk tanggal
 
@@ -63,14 +63,14 @@ $html=<<<EOD
           <th >No Pemeriksaan</th>
           <th width="100">Tanggal</th>
           <th width="100">Nip Petugas</th>
-          <th>Nama Petugas</th>
           <th>Kode Jadwal</th>
-          <th>Jadwal Imunisasi</th>
           <th>Kode Vaksin</th>
-          <th>Jenis Vaksin</th>
-          <th>Nama Vaksin</th>
-          <th>Dosis</th>
-          <th>Keterangan Vaksin</th>
+          <th>Kode Bayi</th>
+          <th>Umur Bayi</th>
+		  <th>Berat Badan</th>
+		  <th>Tinggi Badan</th>
+		  <th>Lingkar Kepala Bayi</th>
+          <th>Status Gizi</th>
 
       </tr>
     </table>
@@ -99,53 +99,24 @@ $no = 1;
             <td>'.$data->No_pemeriksaan.'</td>
             <td width="100">'.$data->Tanggal.'</td>
             <td width="100">'.$data->Nip_petugas.'</td>
-            <td>'.$data->Nama_petugas.'</td>
             <td>'.$data->Kode_jadwal.'</td>
-            <td>'.$data->Jadwal_imunisasi.'</td>
             <td>'.$data->Kode_vaksin.'</td>
-            <td>'.$data->Jenis_vaksin.'</td>
-            <td>'.$data->Nama_vaksin.'</td>
-            <td>'.$data->Dosis.'</td>
-            <td>'.$data->Keterangan_vaksin.'
+            <td>'.$data->Kode_bayi.'</td>
+            <td>'.$data->Umur_bayi.'</td>
+            <td>'.$data->Berat_badan.'</td>
+			<td>'.$data->Tinggi_badan.'</td>
+			<td>'.$data->Lingkar_kepala.'</td>
+            <td>'.$data->Keterangan_gizi.'
             '.$html5 , 0, 1, 0, true, '', true);
     $no++;
   }
-
-
-  $pdf->Ln(10);
-$pdf->SetX(230);
-$pdf->Cell(60,0, ' Mengetahui', 0, 1, 'L', 0, '', 0);
-$pdf->SetX(210);
-$pdf->Cell(60,0, ' Kepla Puskesmas Lepasan', 0, 1, 'L', 0, '', 0);
-$pdf->Ln(20);
-$pdf->SetX(228);
-$pdf->Cell(60,0, ' Nama Kepala', 0, 1, 'L', 0, '', 0);
-$pdf->SetX(231);
-$pdf->Cell(60,0, ' Nip Kepala', 0, 1, 'L', 0, '', 0);
-
-// ===========================================
-
-$pdf->Ln(20);
-$pdf->SetX(210);
-$pdf->Cell(60,0, 'Tempat Posyandu, '.date("d-m-Y"), 0, 1, 'L', 0, '', 0); // untuk tanggal
-
-// $pdf->writeHTMLCell(0, 0, '', '', '<H2>NOTA PEMBELIAN</H2>' , 0, 2, 0, true, 'C', true);
+  $pdf->Ln(5);
 
 $html=<<<EOD
-    <center> <h1> Laporan Data Pertumbuhan </h1> </center>
     <table border="1">
       <tr align="center" style="font-weight: bold;">
-          <th>Kode Bayi</th>
-          <th> Nama Bayi</th>
-          <th>Jekel</th>
-          <th width="100">Tanggal Lahir</th>
-          <th>Umur Bayi</th>
           <th>Keterangan</th>
           <th>Keluhan</th>
-          <th>Berat Badan</th>
-          <th>Lingkar Kepala</th>
-          <th>Lebar Badan</th>
-          <th>Keterangan Gizi</th>
       </tr>
     </table>
 EOD;
@@ -169,17 +140,8 @@ $no = 1;
       while ($data = $sql->fetch_object()) {
       $pdf->SetX(10);
       $pdf->writeHTMLCell(0, 0, '', '', $html2.''.
-            $data->Kode_bayi.'</td>
-            <td>'.$data->Nama_bayi.'</td>
-            <td >'.$data->Jenis_kelamin.'</td>
-            <td width="100">'.$data->Tgl_lahir.'</td>
-            <td>'.$data->Umur_bayi.'</td>
-            <td>'.$data->Keterangan.'</td>
-            <td>'.$data->Keluhan.'</td>
-            <td>'.$data->Berat_badan.'</td>
-            <td>'.$data->Lingkar_kepala.'</td>
-            <td>'.$data->Lebar_badan.'</td>
-            <td>'.$data->Keterangan_gizi.'
+            $data->Keterangan.'</td>
+            <td>'.$data->Keluhan.'
             '.$html5 , 0, 1, 0, true, '', true);
     $no++;
   }

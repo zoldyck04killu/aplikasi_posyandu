@@ -61,7 +61,7 @@ $html=<<<EOD
       <tr align="center" style="font-weight: bold;">
           <th width="50">No</th>
           <th>Kode Vaksin</th>
-          <th  width="170">Nama Vaksin</th>
+          <th  width="170">Jenis Vaksin</th>
           <th>Dosis</th>
           <th width="370">Keterangan Vaksin</th>
       </tr>

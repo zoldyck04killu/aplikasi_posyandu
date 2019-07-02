@@ -2,10 +2,10 @@
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: May 26, 2019 at 05:35 AM
--- Server version: 10.3.14-MariaDB
--- PHP Version: 7.3.4
+-- Host: 127.0.0.1
+-- Generation Time: Jul 02, 2019 at 05:32 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -41,7 +41,7 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`username`, `password`, `hak_akses`, `nip_petugas`) VALUES
 ('admin', '$2y$10$sqvLAjqp6qUV8nbzmoIeNuvStHc9MCgxqCGE0OmaoZ2gbcn9YS1Jm', 0, ''),
-('petugas1', '$2y$10$/gPoFeylMPDH3fcX.hWQF./2gqkfFWZh5P5px0hh38MtoeUInjTTG', 0, '08634234');
+('ramli', '$2y$10$peSGaZQNh8QbxBGp/dZSBOHHPCNCw.OpZCciltIo/DD3crJ4.nyJK', 0, '196612121990031');
 
 -- --------------------------------------------------------
 
@@ -67,26 +67,36 @@ CREATE TABLE `bayi` (
 --
 
 INSERT INTO `bayi` (`Kode_bayi`, `Nama_bayi`, `Jekel`, `Tempat_lahir`, `Tanggal_lahir`, `Nama_ortu`, `Umur_bayi`, `Agama`, `No_hp`, `Alamat`) VALUES
-('B001', 'Cuta Sri', 'pria', 'Banjarmasin', '2019-01-01', 'Natasha Wilona aaa', 5, 'Islam', '08714578345', 'Banjarmasin selatan'),
-('B002', 'asas', 'pria', 'ttt', '2019-03-11', 'sdcasca', 5, 'Islam', '9867563452', 'jkn');
+('B001', 'Ahmad Raihan', 'pria', 'Lepasan', '2014-06-21', 'Kamalia / Zainudin', 43, 'Islam', '085758589944', 'Lepasan');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Jadwal_imunisasi`
+-- Table structure for table `jadwal_imunisasi`
 --
 
-CREATE TABLE `Jadwal_imunisasi` (
+CREATE TABLE `jadwal_imunisasi` (
   `Kode_imunisasi` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Jadwal_imunisasi` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `Jadwal_imunisasi`
+-- Dumping data for table `jadwal_imunisasi`
 --
 
-INSERT INTO `Jadwal_imunisasi` (`Kode_imunisasi`, `Jadwal_imunisasi`) VALUES
-('Imu001', '2019-04-17');
+INSERT INTO `jadwal_imunisasi` (`Kode_imunisasi`, `Jadwal_imunisasi`) VALUES
+('IMU001', '2018-01-01'),
+('IMU002', '2018-02-01'),
+('IMU003', '2018-03-01'),
+('IMU004', '2018-04-02'),
+('IMU005', '2018-05-01'),
+('IMU006', '2018-06-01'),
+('IMU007', '2018-07-02'),
+('IMU008', '2018-08-01'),
+('IMU009', '2018-09-03'),
+('IMU010', '2018-10-01'),
+('IMU011', '2018-11-01'),
+('IMU012', '2018-12-03');
 
 -- --------------------------------------------------------
 
@@ -108,7 +118,7 @@ CREATE TABLE `pengguna` (
 --
 
 INSERT INTO `pengguna` (`username`, `password`, `hak_akses`, `Tanggal`, `Blokir_pengguna`, `kode_bayi`) VALUES
-('wira', '$2y$10$5bHrdsMC.zMhDvnNUSJ0S.KJXaGB.ay84gtnQIUgQy.GJ1G4iKt2a', 1, '2019-05-15', 0, 'B001');
+('ahmad_raihan', '$2y$10$yA2OERQ4MGbU9C1Dt3mlC.MPDEqTCFdeMSRSK/ySndUveswEa7dUG', 1, '2019-06-28', 0, 'B001');
 
 -- --------------------------------------------------------
 
@@ -137,8 +147,8 @@ CREATE TABLE `pertumbuhan_bayi` (
 --
 
 INSERT INTO `pertumbuhan_bayi` (`No_pemeriksaan`, `Tanggal`, `Nip_petugas`, `Kode_jadwal`, `Kode_vaksin`, `Kode_bayi`, `umur_bayi`, `Keterangan`, `Keluhan`, `Berat_badan`, `Tinggi_badan`, `Lingkar_kepala`, `Keterangan_gizi`) VALUES
-('N001', '2019-03-05', '08634234', 'Imu001', 'V001', 'B001', 2, 'kurang gizi', 'pusing', 2, 0, 30, 'kurang baik'),
-('N002', '2019-04-09', '08634234', 'Imu001', 'V001', 'B001', 3, 'cacar air', 'gatal', 4, 0, 40, 'kurang'),
+('N001', '2018-01-15', '196612121990031', 'IMU001', 'V001', 'B001', 42, ' ', ' ', 14, 95, 45, 'Baik / Normal'),
+('N002', '2018-02-14', '196612121990031', 'IMU002', 'V002', 'B001', 43, '', '', 14, 95, 0, 'Baik / Normal'),
 ('N003', '2019-05-14', '08634234', 'Imu001', 'V001', 'B002', 2, 'fdsvfs baru', 'sdcasw baru', 5, 55, 40, 'cukup baru');
 
 -- --------------------------------------------------------
@@ -163,7 +173,8 @@ CREATE TABLE `petugas` (
 --
 
 INSERT INTO `petugas` (`Nip_petugas`, `Nama_petugas`, `Jabatan`, `Jenis_kelamin`, `Tempat_lahir`, `Tgl_lahir`, `No_hp`, `alamat`) VALUES
-('08634234', 'momon kurniawan', 'Manager', 'pria', 'Banjarmasin Selatan', '2019-04-09', '0812645378', 'kayutangi 4');
+('196612121990031', 'H. Ramli, S.Kep', 'Petugas Posyandu', 'pria', 'Nagara', '1975-06-07', '082232324890', 'Lepasan'),
+('197607042010011', 'Budi Hariyanto, Amk', 'Petugas Posyandu', 'pria', 'Marabahan', '1981-08-14', '082377247812', 'Marabahan');
 
 -- --------------------------------------------------------
 
@@ -185,7 +196,11 @@ CREATE TABLE `vaksin` (
 --
 
 INSERT INTO `vaksin` (`Kode_vaksin`, `tanggal`, `Nama_vaksin`, `Dosis`, `perberian`, `Keterangan_vaksin`) VALUES
-('V001', '2019-05-06', 'Gizi', '2x sehari', 2, 'minum sebelum makan');
+('V001', '2018-01-01', 'BCG+PELARUT', '10', 10, ''),
+('V002', '2018-01-01', 'DPT HB (COMBO)', '10', 10, ''),
+('V003', '2018-01-01', 'POLIO+PIPET', '15', 15, ''),
+('V004', '2018-01-01', 'HEPATITIS B UNIJECK', '5', 5, ''),
+('V005', '2018-01-01', 'CAMPAK+PELARUT', '10', 10, '');
 
 --
 -- Indexes for dumped tables
@@ -204,9 +219,9 @@ ALTER TABLE `bayi`
   ADD PRIMARY KEY (`Kode_bayi`);
 
 --
--- Indexes for table `Jadwal_imunisasi`
+-- Indexes for table `jadwal_imunisasi`
 --
-ALTER TABLE `Jadwal_imunisasi`
+ALTER TABLE `jadwal_imunisasi`
   ADD PRIMARY KEY (`Kode_imunisasi`);
 
 --

@@ -6,7 +6,7 @@ $data = $objAdmin->rubahBayi($id);
 $a = $data->fetch_object();
  ?>
  <div class="header-hal">
-   <h1>Data Bayi Dan Belita</h1>
+   <h1>Data Bayi Dan Balita</h1>
      <hr>
  </div>
 

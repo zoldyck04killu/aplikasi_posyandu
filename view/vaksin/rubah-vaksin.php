@@ -26,7 +26,7 @@ $a = $data->fetch_object();
         </div>
       </div>
       <div class="form-group row">
-        <label for="staticEmail" class="col-sm-2 col-form-label" >Nama Vaksin</label>
+        <label for="staticEmail" class="col-sm-2 col-form-label" >Jenis Vaksin</label>
         <div class="col-sm-10">
             <input class="form-control" type="text" placeholder="Nama vaksin" name="nama_vaksin" value="<?=$a->Nama_vaksin; ?>">
         </div>

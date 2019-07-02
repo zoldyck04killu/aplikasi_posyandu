@@ -9,7 +9,8 @@ $data = $objAdmin->grafk_pertumbuhan($kode_bayi);
 // berat badan
 // Linkar kepala
 // Lebar badan
-
+ // while($a = $data->fetch_object()) {
+ //  echo '['.$a->umur_bayi.','.$a->Berat_badan.','.$a->Lingkar_kepala.','.$a->Tinggi_badan.'],'; }
  ?>
 
 <script type="text/javascript">
@@ -18,9 +19,9 @@ $data = $objAdmin->grafk_pertumbuhan($kode_bayi);
 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Umur', 'Berat Badan', 'Linkar kepala', 'Lebar Badan'],
+          ['Umur', 'Berat Badan', 'Linkar kepala', 'Tinggi Badan'],
           <?php while($a = $data->fetch_object()) {
-            echo '['.$a->umur_bayi.','.$a->Berat_badan.','.$a->Lingkar_kepala.','.$a->Lebar_badan.'],'; } ?>
+            echo '['.$a->umur_bayi.','.$a->Berat_badan.','.$a->Lingkar_kepala.','.$a->Tinggi_badan.'],'; } ?>
           // ['2014',  2, 20, 40],
           // ['2015',  2, 18, 30],
           // ['2016',  3, 24, 30]
@@ -49,9 +50,9 @@ $data = $objAdmin->grafk_pertumbuhan($kode_bayi);
       function drawVisualization() {
         // Some raw data (not necessarily accurate)
         var data = google.visualization.arrayToDataTable([
-        ['Umur', 'Berat Badan', 'Linkar kepala', 'Lebar Badan'],
+        ['Umur', 'Berat Badan', 'Linkar kepala', 'Tinggi Badan'],
         <?php while($b = $data2->fetch_object()) {
-          echo '['.$b->umur_bayi.', '.$b->Berat_badan.', '.$b->Lingkar_kepala.', '.$b->Lebar_badan.'], '; } ?>
+          echo '['.$b->umur_bayi.', '.$b->Berat_badan.', '.$b->Lingkar_kepala.', '.$b->Tinggi_badan.'], '; } ?>
         ]);
 
         var options = {
