@@ -46,12 +46,12 @@
               <input class="form-control" type="text" placeholder="Nama Ortu" name="nama_ortu">
           </div>
       </div>
-      <div class="form-group row">
+      <!-- <div class="form-group row">
           <label for="staticEmail" class="col-sm-2 col-form-label" >Umur bayi</label>
           <div class="col-sm-10">
               <input class="form-control" type="text" placeholder="Umur bayi" name="umur_bayi">
           </div>
-      </div>
+      </div> -->
       <div class="form-group row">
           <label for="staticEmail" class="col-sm-2 col-form-label" >Agama</label>
           <div class="col-sm-10">
@@ -84,12 +84,12 @@ if (isset($_POST['simpanBayi']))
   $tempat_lahir = $obj->conn->real_escape_string($_POST['tempat_lahir']);
   $tanggal_lahir = $obj->conn->real_escape_string($_POST['tl']);
   $nama_ortu = $obj->conn->real_escape_string($_POST['nama_ortu']);
-  $umur_bayi = $obj->conn->real_escape_string($_POST['umur_bayi']);
+  // $umur_bayi = $obj->conn->real_escape_string($_POST['umur_bayi']);
   $agama = $obj->conn->real_escape_string($_POST['agama']);
   $no_hp = $obj->conn->real_escape_string($_POST['no_hp']);
   $alamat = $obj->conn->real_escape_string($_POST['alamat']);
 
-  $simpanBayi = $objAdmin->simpanBayi($kode_bayi, $nama_bayi,$jekel,$tempat_lahir,$tanggal_lahir,$nama_ortu,$umur_bayi,$agama,$no_hp,$alamat);
+  $simpanBayi = $objAdmin->simpanBayi($kode_bayi, $nama_bayi,$jekel,$tempat_lahir,$tanggal_lahir,$nama_ortu,$agama,$no_hp,$alamat);
   if ($simpanBayi) {
       echo "<script>
       swal(

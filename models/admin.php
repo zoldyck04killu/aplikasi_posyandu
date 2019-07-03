@@ -230,13 +230,24 @@ public function showBayiPengguna($kode_bayi){
   return $query;
 }
 
-public function simpanBayi($kode_bayi, $nama_bayi,$jekel,$tempat_lahir,$tanggal_lahir,$nama_ortu,$umur_bayi,$agama,$no_hp,$alamat){
+public function simpanBayi($kode_bayi, $nama_bayi,$jekel,$tempat_lahir,$tanggal_lahir,$nama_ortu,$agama,$no_hp,$alamat){
     $db = $this->mysqli->conn;
+    // $sql_bayi = "SELECT Tanggal_lahir FROM bayi where kode_bayi= '$kode_bayi' ";
+    // $query_bayi = $db->query($sql_bayi);
+    // $a = $query_bayi->fetch_object();
+
+    $origDate = $tanggal_lahir;
+    $birthDate = date("Y-m-d", strtotime($origDate));
+
+      $birthday = new DateTime($birthDate);
+      $datenew = new DateTime();
+      $diff = $birthday->diff(new DateTime($tgl_pemeriksaan));
+      $umurbayi = $diff->format('%m') + 12 * $diff->format('%y');
     // var_dump($alamat);
     $simpanBayi = $db->query("INSERT INTO bayi
                               (Kode_bayi,Nama_bayi,Jekel,Tempat_lahir,Tanggal_lahir,Nama_ortu,Umur_bayi,Agama,No_hp,Alamat)
                               VALUES
-                              ('$kode_bayi', '$nama_bayi','$jekel','$tempat_lahir','$tanggal_lahir','$nama_ortu','$umur_bayi','$agama','$no_hp','$alamat')
+                              ('$kode_bayi', '$nama_bayi','$jekel','$tempat_lahir','$tanggal_lahir','$nama_ortu','$umurbayi','$agama','$no_hp','$alamat')
                               ") or die ($db->error);
     if ($simpanBayi)
     {
@@ -253,11 +264,24 @@ public function rubahBayi($id)
    return $query;
  }
 
- public function aksiRubahBayi($kode_bayi_lama,$kode_bayi, $nama_bayi,$jekel,$tempat_lahir,$tanggal_lahir,$nama_ortu,$umur_bayi,$agama,$no_hp,$alamat)
+ public function aksiRubahBayi($kode_bayi_lama,$kode_bayi, $nama_bayi,$jekel,$tempat_lahir,$tanggal_lahir,$nama_ortu,$agama,$no_hp,$alamat)
 {
 $db = $this->mysqli->conn;
+// $sql_bayi = "SELECT Tanggal_lahir FROM bayi where kode_bayi= '$kode_bayi' ";
+// $query_bayi = $db->query($sql_bayi);
+// $a = $query_bayi->fetch_object();
+
+// $origDate = $a->Tanggal_lahir;
+$origDate = $tanggal_lahir;
+$birthDate = date("Y-m-d", strtotime($origDate));
+
+  $birthday = new DateTime($birthDate);
+  $datenew = new DateTime();
+  $diff = $birthday->diff(new DateTime($tgl_pemeriksaan));
+  $umurbayi = $diff->format('%m') + 12 * $diff->format('%y');
+
 $rubahBayi = $db->query("UPDATE bayi SET Kode_bayi='$kode_bayi',Nama_bayi='$nama_bayi',Jekel='$jekel',Tempat_lahir='$tempat_lahir',Tanggal_lahir='$tanggal_lahir',
-  Nama_ortu='$nama_ortu',Umur_bayi='$umur_bayi',Agama='$agama',No_hp='$no_hp',Alamat='$alamat'
+  Nama_ortu='$nama_ortu',Umur_bayi='$umurbayi',Agama='$agama',No_hp='$no_hp',Alamat='$alamat'
   WHERE Kode_bayi = '$kode_bayi_lama' ") or die ($db->error);
   if ($rubahBayi)
   {

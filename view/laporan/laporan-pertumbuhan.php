@@ -102,7 +102,7 @@ $no = 1;
             <td>'.$data->Kode_jadwal.'</td>
             <td>'.$data->Kode_vaksin.'</td>
             <td>'.$data->Kode_bayi.'</td>
-            <td>'.$data->Umur_bayi.'</td>
+            <td>'.$data->umur_bayi.'</td>
             <td>'.$data->Berat_badan.'</td>
 			<td>'.$data->Tinggi_badan.'</td>
 			<td>'.$data->Lingkar_kepala.'</td>
