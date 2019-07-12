@@ -36,7 +36,9 @@ if (@$_SESSION['kode_bayi']) {
       <th scope="col">Status Gizi</th>
       <th scope="col">Keterangan</th>
       <th scope="col">Keluhan</th>
-      <?php if (@$_SESSION['hak_akses'] == 0) { ?>
+      <th scope="col">Posyandu</th>
+
+      <?php if (@$_SESSION['hak_akses'] == 0 || @$_SESSION['hak_akses'] == 3) { ?>
       <th scope="col">Config</th>
     <?php } ?>
       <th scope="col">Fitur</th>
@@ -67,7 +69,9 @@ if (@$_SESSION['kode_bayi']) {
       <td><?= $a->Keterangan_gizi; ?></td>
       <td><?= $a->Keterangan; ?></td>
       <td><?= $a->Keluhan; ?></td>
-      <?php if (@$_SESSION['hak_akses'] == 0) { ?>
+      <td><?= $a->posyandu; ?></td>
+
+      <?php if (@$_SESSION['hak_akses'] == 0 || @$_SESSION['hak_akses'] == 3) { ?>
       <td>
           <a href="?view=rubah-pertumbuhan&kode=<?=$a->No_pemeriksaan; ?>" class="btn btn-sm btn-warning">Edit</a>
           <a href="?view=hapus-pertumbuhan&kode=<?=$a->No_pemeriksaan; ?>" class="btn btn-sm btn-danger">Hapus</a>
@@ -86,7 +90,7 @@ if (@$_SESSION['kode_bayi']) {
 </table>
 </div>
 
-<?php if (@$_SESSION['hak_akses'] == 0) { ?>
+<?php if (@$_SESSION['hak_akses'] == 0 || @$_SESSION['hak_akses'] == 3) { ?>
 
 <a href="?view=tambah-pertumbuhan">
     <button type="button" class="btn btn-primary">Tambah</button>

@@ -56,6 +56,10 @@ elseif (@$_GET['view'] == 'hapus-vaksin')
     });
   </script>';
 }
+elseif (@$_GET['view'] == 'jadwal-bayi-imunisasi')
+{
+    include 'view/jadwal-bayi-imunisasi.php';
+}
 elseif (@$_GET['view'] == 'jadwal-imunisasi')
 {
     include 'view/jadwal-imunisasi/jadwal-imunisasi.php';
@@ -142,6 +146,14 @@ elseif (@$_GET['view'] == 'login-admin')
 elseif (@$_GET['view'] == 'register-admin')
 {
     include 'view/register.php';
+}
+elseif (@$_GET['view'] == 'login-posyandu')
+{
+    include 'view/login-posyandu.php';
+}
+elseif (@$_GET['view'] == 'register-posyandu')
+{
+    include 'view/register-posyandu.php';
 }
 elseif (@$_GET['view'] == 'logout-admin')
 {

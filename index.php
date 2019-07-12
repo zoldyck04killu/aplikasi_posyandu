@@ -84,6 +84,12 @@ $objAdmin = new Admin($obj);
                         <span class="menu-collapsed">User</span>
                       </div>
                     </a>
+                    <a href="?view=login-posyandu"  aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                      <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-dashboard fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Login Posyandu</span>
+                      </div>
+                    </a>
                   <?php } ?>
                 <a href="?view=home" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-start align-items-center">
@@ -91,12 +97,24 @@ $objAdmin = new Admin($obj);
                         <span class="menu-collapsed">Menu Utama</span>
                     </div>
                 </a>
+                <a href="?view=jadwal-bayi-imunisasi"  aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                  <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="fa fa-dashboard fa-fw mr-3"></span>
+                    <span class="menu-collapsed">Jadwal Bayi Imunisasi</span>
+                  </div>
+                </a>
                 <?php if (@$_SESSION['user']) { ?>
                 <?php if (@$_SESSION['hak_akses'] == 0) { ?>
                 <a href="?view=petugas"  aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-dashboard fa-fw mr-3"></span>
                         <span class="menu-collapsed">Petugas</span>
+                    </div>
+                </a>
+                <a href="?view=register-posyandu"  aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-dashboard fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Add Posyandu</span>
                     </div>
                 </a>
                 <a href="?view=vaksin"  aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
@@ -109,7 +127,7 @@ $objAdmin = new Admin($obj);
                 <a href="?view=jadwal-imunisasi"  aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-dashboard fa-fw mr-3"></span>
-                        <span class="menu-collapsed">Jadwal Imunisasi</span>
+                        <span class="menu-collapsed">Aturan Jadwal Imunisasi</span>
                     </div>
                 </a>
                 <a href="?view=bayi" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">

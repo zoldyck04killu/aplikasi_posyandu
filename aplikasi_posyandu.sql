@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jul 02, 2019 at 05:32 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.3
+-- Host: localhost
+-- Generation Time: Jul 12, 2019 at 04:54 PM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.3.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -59,15 +59,18 @@ CREATE TABLE `bayi` (
   `Umur_bayi` int(10) NOT NULL,
   `Agama` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `No_hp` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Alamat` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
+  `Alamat` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `posyandu` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `bayi`
 --
 
-INSERT INTO `bayi` (`Kode_bayi`, `Nama_bayi`, `Jekel`, `Tempat_lahir`, `Tanggal_lahir`, `Nama_ortu`, `Umur_bayi`, `Agama`, `No_hp`, `Alamat`) VALUES
-('B001', 'Ahmad Raihan', 'pria', 'Lepasan', '2014-06-21', 'Kamalia / Zainudin', 43, 'Islam', '085758589944', 'Lepasan');
+INSERT INTO `bayi` (`Kode_bayi`, `Nama_bayi`, `Jekel`, `Tempat_lahir`, `Tanggal_lahir`, `Nama_ortu`, `Umur_bayi`, `Agama`, `No_hp`, `Alamat`, `posyandu`) VALUES
+('B001', 'Ahmad Raihan', 'pria', 'Lepasan', '2009-06-04', 'Kamalia / Zainudin', 60, 'Islam', '085758589944', 'Lepasan', 'posyandu1'),
+('B002', 'Akhmad Suri', 'pria', 'Gambut', '2019-05-03', 'sarah', 2, 'islam', '0875215213', 'jln gambut', 'posyandu1'),
+('B003', 'Aisyah', 'pria', 'Barabai', '2019-01-01', 'Budi', 6, 'Islam', '08721212123', 'Barabai dalam', 'posyandu1');
 
 -- --------------------------------------------------------
 
@@ -77,26 +80,21 @@ INSERT INTO `bayi` (`Kode_bayi`, `Nama_bayi`, `Jekel`, `Tempat_lahir`, `Tanggal_
 
 CREATE TABLE `jadwal_imunisasi` (
   `Kode_imunisasi` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Jadwal_imunisasi` date NOT NULL
+  `Umur` int(20) NOT NULL,
+  `vaksin` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `jadwal_imunisasi`
 --
 
-INSERT INTO `jadwal_imunisasi` (`Kode_imunisasi`, `Jadwal_imunisasi`) VALUES
-('IMU001', '2018-01-01'),
-('IMU002', '2018-02-01'),
-('IMU003', '2018-03-01'),
-('IMU004', '2018-04-02'),
-('IMU005', '2018-05-01'),
-('IMU006', '2018-06-01'),
-('IMU007', '2018-07-02'),
-('IMU008', '2018-08-01'),
-('IMU009', '2018-09-03'),
-('IMU010', '2018-10-01'),
-('IMU011', '2018-11-01'),
-('IMU012', '2018-12-03');
+INSERT INTO `jadwal_imunisasi` (`Kode_imunisasi`, `Umur`, `vaksin`) VALUES
+('IMU001', 1, ''),
+('IMU002', 2, ''),
+('IMU003', 3, ''),
+('IMU004', 4, ''),
+('IMU005', 9, ''),
+('IMU006', 18, '');
 
 -- --------------------------------------------------------
 
@@ -118,7 +116,9 @@ CREATE TABLE `pengguna` (
 --
 
 INSERT INTO `pengguna` (`username`, `password`, `hak_akses`, `Tanggal`, `Blokir_pengguna`, `kode_bayi`) VALUES
-('ahmad_raihan', '$2y$10$yA2OERQ4MGbU9C1Dt3mlC.MPDEqTCFdeMSRSK/ySndUveswEa7dUG', 1, '2019-06-28', 0, 'B001');
+('ahmad_raihan', '$2y$10$yA2OERQ4MGbU9C1Dt3mlC.MPDEqTCFdeMSRSK/ySndUveswEa7dUG', 1, '2019-06-28', 0, 'B001'),
+('dadang', '$2y$10$TgNlXIMQ1J/su0H0gNAAye.Wb8kvNEuskKFTllbnlIOdfDqgSZ75W', 1, '2019-07-02', 0, 'B002'),
+('susi', '$2y$10$ukyNSrL/n/uGz52j/RfpF.jK6s.24Hou84IKa9bdxkYICjhdsTZD2', 1, '2019-07-02', 0, 'B003');
 
 -- --------------------------------------------------------
 
@@ -139,17 +139,18 @@ CREATE TABLE `pertumbuhan_bayi` (
   `Berat_badan` int(10) NOT NULL,
   `Tinggi_badan` int(13) NOT NULL,
   `Lingkar_kepala` int(20) NOT NULL,
-  `Keterangan_gizi` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
+  `Keterangan_gizi` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `posyandu` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `pertumbuhan_bayi`
 --
 
-INSERT INTO `pertumbuhan_bayi` (`No_pemeriksaan`, `Tanggal`, `Nip_petugas`, `Kode_jadwal`, `Kode_vaksin`, `Kode_bayi`, `umur_bayi`, `Keterangan`, `Keluhan`, `Berat_badan`, `Tinggi_badan`, `Lingkar_kepala`, `Keterangan_gizi`) VALUES
-('N001', '2018-01-15', '196612121990031', 'IMU001', 'V001', 'B001', 42, ' ', ' ', 14, 95, 45, 'Baik / Normal'),
-('N002', '2018-02-14', '196612121990031', 'IMU002', 'V002', 'B001', 43, '', '', 14, 95, 0, 'Baik / Normal'),
-('N003', '2019-05-14', '08634234', 'Imu001', 'V001', 'B002', 2, 'fdsvfs baru', 'sdcasw baru', 5, 55, 40, 'cukup baru');
+INSERT INTO `pertumbuhan_bayi` (`No_pemeriksaan`, `Tanggal`, `Nip_petugas`, `Kode_jadwal`, `Kode_vaksin`, `Kode_bayi`, `umur_bayi`, `Keterangan`, `Keluhan`, `Berat_badan`, `Tinggi_badan`, `Lingkar_kepala`, `Keterangan_gizi`, `posyandu`) VALUES
+('N001', '2018-01-15', '196612121990031', 'IMU001', 'V001', 'B001', 42, ' sakit', 'panas', 14, 95, 45, 'Baik / Normal', 'posyandu1'),
+('N002', '2018-02-14', '196612121990031', 'IMU002', 'V002', 'B001', 43, 'ssasasa', 'mmmmmm', 14, 95, 0, 'Baik / Normal', 'posyandu1'),
+('N003', '2019-05-14', '08634234', 'Imu001', 'V001', 'B002', 0, 'fdsvfs baru', 'sdcasw baru', 5, 55, 40, 'cukup baru', 'posyandu1');
 
 -- --------------------------------------------------------
 
@@ -175,6 +176,27 @@ CREATE TABLE `petugas` (
 INSERT INTO `petugas` (`Nip_petugas`, `Nama_petugas`, `Jabatan`, `Jenis_kelamin`, `Tempat_lahir`, `Tgl_lahir`, `No_hp`, `alamat`) VALUES
 ('196612121990031', 'H. Ramli, S.Kep', 'Petugas Posyandu', 'pria', 'Nagara', '1975-06-07', '082232324890', 'Lepasan'),
 ('197607042010011', 'Budi Hariyanto, Amk', 'Petugas Posyandu', 'pria', 'Marabahan', '1981-08-14', '082377247812', 'Marabahan');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `posyandu`
+--
+
+CREATE TABLE `posyandu` (
+  `id_posyandu` int(50) NOT NULL,
+  `nama_posyandu` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hak_akses` int(5) NOT NULL DEFAULT 3
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `posyandu`
+--
+
+INSERT INTO `posyandu` (`id_posyandu`, `nama_posyandu`, `username`, `password`, `hak_akses`) VALUES
+(1, 'posyandu1', 'posyandu1', '$2y$10$lTf8TPoQDk4xOnFC4sZOgOROIi9tVsAggEmJbqVNl9zwl111YJI3C', 3);
 
 -- --------------------------------------------------------
 
@@ -243,10 +265,26 @@ ALTER TABLE `petugas`
   ADD PRIMARY KEY (`Nip_petugas`);
 
 --
+-- Indexes for table `posyandu`
+--
+ALTER TABLE `posyandu`
+  ADD PRIMARY KEY (`id_posyandu`);
+
+--
 -- Indexes for table `vaksin`
 --
 ALTER TABLE `vaksin`
   ADD PRIMARY KEY (`Kode_vaksin`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `posyandu`
+--
+ALTER TABLE `posyandu`
+  MODIFY `id_posyandu` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

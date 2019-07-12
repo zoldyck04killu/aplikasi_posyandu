@@ -14,9 +14,24 @@
         </div>
       </div>
       <div class="form-group row">
-          <label for="staticEmail" class="col-sm-2 col-form-label" >Jadwal Imunisasi</label>
+          <label for="staticEmail" class="col-sm-2 col-form-label" >Umur</label>
           <div class="col-sm-10">
-              <input class="form-control" type="date" placeholder="" name="jadwal_imunisasi">
+              <input class="form-control" type="text" placeholder="" name="umur">
+          </div>
+      </div>
+      <div class="form-group row">
+          <label for="staticEmail" class="col-sm-2 col-form-label" >Vaksin</label>
+          <div class="col-sm-10">
+              <select class="form-control" id="exampleFormControlSelect1" name="vaksin" >
+                <?php
+               $data = $objAdmin->showVaksin();
+               while ($a = $data->fetch_object()) {
+                   ?>
+                <option value="<?= $a->Kode_vaksin ?>"><?= $a->Nama_vaksin ?></option>
+                <?php
+                }
+                ?>
+              </select>
           </div>
       </div>
       <button type="submit" class="btn btn-primary" name="simpanImunisasi">Simpan</button>
@@ -27,9 +42,11 @@
 if (isset($_POST['simpanImunisasi']))
 {
   $kode_imunisasi = $obj->conn->real_escape_string($_POST['kode_imunisasi']);
-  $jadwal_imunisasi = $obj->conn->real_escape_string($_POST['jadwal_imunisasi']);
+  $umur = $obj->conn->real_escape_string($_POST['umur']);
+  $vaksin = $obj->conn->real_escape_string($_POST['vaksin']);
 
-  $saveImunisasi = $objAdmin->simpanImunisasi($kode_imunisasi, $jadwal_imunisasi);
+
+  $saveImunisasi = $objAdmin->simpanImunisasi($kode_imunisasi, $umur,$vaksin);
   if ($saveImunisasi) {
       echo "<script>
       swal(
